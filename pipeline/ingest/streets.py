@@ -1,4 +1,4 @@
-"""Street centerlines (inkn-q76z) → street segments with width/orientation, plus a v0 sidewalk band.
+"""Street centerlines (inkn-q76z) → street segments with width/orientation, plus sidewalk polygons.
 
 Sidewalks come from the NYC Planimetric Sidewalk layer (52n9-sdep), buffered 0.3 m to close slivers
 (as in Shade First NYC), minus building footprints. Fallback if that fetch fails: a SIDEWALK_M band from
