@@ -21,7 +21,9 @@ def discover(aoi: AOI) -> gpd.GeoDataFrame:
     rows = json.loads(socrata.fetch(aoi, "forms_planting_spaces").read_text())
     df = pd.DataFrame(rows)
     df = df[(df["psstatus"] == "Empty") & (df["pssite"] == "Street")].copy()
-    lon = pd.to_numeric(df["longitude"]); lat = pd.to_numeric(df["latitude"])
+    # use the planting-space point itself; the latitude/longitude columns are address-geocoded
+    # points that sit on the street centerline
+    lon = df["location"].map(lambda p: p["coordinates"][0]); lat = df["location"].map(lambda p: p["coordinates"][1])
     g = gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(lon, lat), crs=WGS84).to_crs(METRIC)
     g["lon"], g["lat"] = lon.values, lat.values
 
