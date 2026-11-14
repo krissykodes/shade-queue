@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shade Queue</title>
+  <link rel="icon" href="data:,">
+  <meta name="description" content="Per-tree 3D canopy and shade simulation for NYC street trees, and a ranking of empty tree pits by the new sidewalk shade a tree there would cast." />
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/deck.gl@9.0.38/dist.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="map"></div>
+
+  <div id="left">
+  <header class="card" id="title">
+    <h1>Shade Queue <select id="aoi" aria-label="Area"></select></h1>
+    <p id="subtitle">Loading…</p>
+  </header>
+
+  <section class="card" id="controls">
+    <label>Day
+      <select id="day">
+        <option value="2026-06-21">Summer solstice (Jun 21)</option>
+        <option value="2026-09-22">Autumn equinox (Sep 22)</option>
+        <option value="2026-03-20">Spring equinox (Mar 20) · leaf-off</option>
+        <option value="2026-12-21">Winter solstice (Dec 21) · leaf-off</option>
+      </select>
+    </label>
+    <label>Time <output id="time-label">--</output>
+      <input id="hour" type="range" min="0" max="0" step="1" value="0" />
+    </label>
+    <div class="row">
+      <button id="play" type="button">▶ Play</button>
+      <label class="inline">Colour <select id="color-mode">
+        <option value="source">by crown source</option>
+        <option value="hours">by summer shade hours</option>
+      </select></label>
+    </div>
+    <div class="toggles">
+      <label><input type="checkbox" id="t-bshadow" checked /> building shadows</label>
+      <label><input type="checkbox" id="t-tshadow" checked /> tree shadows</label>
+      <label><input type="checkbox" id="t-sites" checked /> empty pits</label>
+      <label><input type="checkbox" id="t-hvi" /> heat vulnerability</label>
+    </div>
+    <div id="legend"></div>
+    <div id="stats" class="muted"></div>
+
+    <div id="queue">
+      <h2>Planting queue</h2>
+      <label><span>Plant the top <output id="topn-label">50</output> pits</span>
+        <input id="topn" type="range" min="10" max="200" step="5" value="50" />
+      </label>
+      <div id="queue-stats"></div>
+      <details>
+        <summary>How the pit score works</summary>
+        <p>For every empty street pit we "plant" a 10-year-old London plane (from a 2.5″ caliper, grown with USFS Urban Tree Database curves for Queens) and simulate its shadow on <b>July 15, 2–4 pm</b>, every 30 minutes.</p>
+        <p>Only shadow that lands on <b>sidewalk that is sunny today</b> counts as new shade: not under a building's shadow and not under an existing street tree's shadow (LiDAR-measured crowns).</p>
+        <p><b>New shade (m²·h)</b> = average new sidewalk shade × 2 hours. Pits are ranked by it. <b>Yield</b> = the share of the tree's shadow that is new shade.</p>
+        <p>Heat vulnerability is shown as published (DOHMH, by neighbourhood) and is <i>not</i> mixed into the score: Parks already prioritises neighbourhoods by HVI; this ranks pits within them.</p>
+      </details>
+    </div>
+  </section>
+  </div>
+
+  <aside class="card hidden" id="panel">
+    <button id="close" type="button" aria-label="Close">×</button>
+    <div id="panel-body"></div>
+  </aside>
+
+  <script src="main.js"></script>
+</body>
+</html>
