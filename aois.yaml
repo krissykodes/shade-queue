@@ -1,0 +1,10 @@
+# Named areas of interest. Every pipeline step takes one of these by name.
+# west, south, east, north in EPSG:4326.
+mott_haven:
+  label: "Mott Haven, Bronx (pilot)"
+  bbox: [-73.9290, 40.8050, -73.9160, 40.8140]
+  lidar_year: 2021
+brownsville:
+  label: "Brownsville, Brooklyn"
+  bbox: [-73.9180, 40.6560, -73.9030, 40.6680]
+  lidar_year: 2021

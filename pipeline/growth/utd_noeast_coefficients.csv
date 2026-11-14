@@ -1,0 +1,148 @@
+Region,Scientific Name,SpCode,Independent variable,Predicts component ,Units of predicted components,Model weight,EqName,a,b,c,d,e,Apps min,Apps max,Sigma,n,adj R2,Data min (from raw data),Data max (from raw data),DF
+NoEast,Acer platanoides,ACPL,dbh,age,years,1/sqrt(dbh),cub,2.75443,0.28615,0.01875,-0.00013,,0,119,6.8775,48,0.908,2,85,44
+NoEast,Acer platanoides,ACPL,cdia,dbh,meters,1,loglogw1,1.17148,2.99617,0.06062,,,5.62,114.66,0.24621,42,0.914,2.7,120.7,40
+NoEast,Acer platanoides,ACPL,dbh,crown dia,meters,1/dbh^2,quad,1.05784,0.25365,-0.00083,,,2.46,19.19,0.0019,42,0.921,2,22.1,39
+NoEast,Acer platanoides,ACPL,dbh,crown ht,meters,1/dbh^2,quad,2.1127,0.09666,0.00067,,,2.68,21.99,0.00239,42,0.821,2.5,21,39
+NoEast,Acer platanoides,ACPL,age,dbh,centimeters,1,lin,5.61705,0.91636,,,,5.62,114.66,36.41118,48,0.91,2.7,120.7,46
+NoEast,Acer platanoides,ACPL,dbh,leaf area,sq. meters,1/sqrt(dbh),loglogw2,-0.55184,4.27852,0.07518,,,9.58,677.12,0.27419,31,0.824,3.1,814.1,29
+NoEast,Acer platanoides,ACPL,dbh,tree ht,meters,1/dbh^2,lin,3.16827,0.19507,,,,4.26,25.54,0.00289,42,0.882,3.9,25,40
+NoEast,Acer rubrum,ACRU,dbh,age,years,1/dbh^2,cub,0.93244,0.02113,0.05658,-0.00055,,0,119,0.07354,62,0.924,2,103,58
+NoEast,Acer rubrum,ACRU,cdia,dbh,meters,1,loglogw1,1.48747,2.67841,0.08663,,,3.89,105.2,0.29433,46,0.865,3.2,124.5,44
+NoEast,Acer rubrum,ACRU,dbh,crown dia,meters,1/dbh,quad,0.20703,0.32103,-0.00152,,,1.04,17.15,0.06742,46,0.932,1.3,21.9,43
+NoEast,Acer rubrum,ACRU,dbh,crown ht,meters,1/dbh,lin,2.20449,0.15467,,,,2.61,18.48,0.12037,46,0.846,2.5,26,44
+NoEast,Acer rubrum,ACRU,age,dbh,centimeters,1/age,cub,2.64166,1.27076,-0.01758,0.00012,,2.64,105.2,0.66271,62,0.946,3.2,124.5,58
+NoEast,Acer rubrum,ACRU,dbh,leaf area,sq. meters,1,loglogw1,-1.35066,5.19281,0.18655,,,1.41,853.95,0.43192,34,0.911,2.9,1023.8,32
+NoEast,Acer rubrum,ACRU,dbh,tree ht,meters,1/dbh^2,quad,3.21698,0.24941,-0.00065,,,3.87,22.24,0.00346,46,0.884,4,31,43
+NoEast,Acer saccharinum,ACSA1,dbh,age,years,1/dbh^2,cub,1.655,0.22698,0.05987,-0.0008,,1,150,0.25103,55,0.799,2,99,51
+NoEast,Acer saccharinum,ACSA1,cdia,dbh,meters,1/cdia^2,cub,2.71478,-0.12565,0.56738,-0.01531,,1.89,63.58,1.121,54,0.923,0.9,123.2,50
+NoEast,Acer saccharinum,ACSA1,dbh,crown dia,meters,1/dbh,cub,0.73372,0.3504,-0.00296,0.00001,,1.51,13.41,0.07348,54,0.935,1.7,21.7,50
+NoEast,Acer saccharinum,ACSA1,dbh,crown ht,meters,1,loglogw1,0.15143,1.68838,0.0443,,,1.58,12.64,0.21048,54,0.828,2,22,52
+NoEast,Acer saccharinum,ACSA1,age,dbh,centimeters,1,loglogw1,1.1583,1.77675,0.25666,,,2.25,58.49,0.50662,55,0.634,0.9,123.2,53
+NoEast,Acer saccharinum,ACSA1,dbh,leaf area,sq. meters,1,loglogw1,-0.53332,4.75329,0.2281,,,1.98,538.02,0.4776,36,0.907,3,1427.2,34
+NoEast,Acer saccharinum,ACSA1,dbh,tree ht,meters,1/sqrt(dbh),loglogw2,0.42084,1.68914,0.00482,,,2.01,16.72,0.06943,54,0.935,2.5,27.5,52
+NoEast,Acer saccharum,ACSA2,dbh,age,years,1,loglogw1,-0.54715,3.22652,0.0706,,,0,121,0.2657,16,0.91,2,95,14
+NoEast,Acer saccharum,ACSA2,cdia,dbh,meters,1/cdia,quad,0.71706,2.40298,0.18081,,,3.02,105.5,9.10548,31,0.919,2.9,105.7,28
+NoEast,Acer saccharum,ACSA2,dbh,crown dia,meters,1/sqrt(dbh),quad,0.79563,0.28114,-0.0013,,,1.4,15.95,0.30417,31,0.937,1.5,17.7,28
+NoEast,Acer saccharum,ACSA2,dbh,crown ht,meters,1/dbh,lin,1.83951,0.19211,,,,2.26,22.11,0.14262,31,0.877,2,22,29
+NoEast,Acer saccharum,ACSA2,age,dbh,centimeters,1/age,lin,2.17085,0.85396,,,,2.17,105.5,0.76475,16,0.908,2.9,105.7,14
+NoEast,Acer saccharum,ACSA2,dbh,leaf area,sq. meters,1,loglogw1,-1.1744,5.16173,0.30588,,,1.23,1037.94,0.55307,25,0.904,1.3,1056,23
+NoEast,Acer saccharum,ACSA2,dbh,tree ht,meters,1/dbh,lin,3.14132,0.23463,,,,3.65,27.9,0.17939,31,0.894,3,28.5,29
+NoEast,Aesculus hippocastanum,AEHI,dbh,age,years,1,quad,-1.3217,1.38284,-0.00555,,,0,80,16.37021,25,0.967,2,44,22
+NoEast,Aesculus hippocastanum,AEHI,cdia,dbh,meters,1/cdia^2,cub,4.35979,-1.80599,1.22827,-0.05025,,3.81,90.02,0.88533,33,0.955,2.4,90.2,29
+NoEast,Aesculus hippocastanum,AEHI,dbh,crown dia,meters,1/sqrt(dbh),cub,0.16411,0.36854,-0.00599,0.00004,,1.33,16.29,0.23416,33,0.919,0.5,17.8,29
+NoEast,Aesculus hippocastanum,AEHI,dbh,crown ht,meters,1/sqrt(dbh),lin,1.1662,0.16711,,,,1.73,16.21,0.52662,33,0.872,0.5,17,31
+NoEast,Aesculus hippocastanum,AEHI,age,dbh,centimeters,1/sqrt(age),quad,3.34694,0.45797,0.00782,,,3.35,90.02,2.88861,25,0.969,2.4,90.2,22
+NoEast,Aesculus hippocastanum,AEHI,dbh,leaf area,sq. meters,1,loglogw1,-2.24482,5.56941,0.26069,,,1.45,546.94,0.51058,26,0.901,1.1,739.8,24
+NoEast,Aesculus hippocastanum,AEHI,dbh,tree ht,meters,1/sqrt(dbh),quad,1.36605,0.31715,-0.00145,,,2.41,18.15,0.57671,33,0.894,1.5,21,30
+NoEast,Fraxinus pennsylvanica,FRPE,dbh,age,years,1/dbh^2,quad,0.15398,0.50207,0.01235,,,0,107,0.03573,41,0.934,2,85,38
+NoEast,Fraxinus pennsylvanica,FRPE,cdia,dbh,meters,1/cdia^2,quad,2.09268,2.01095,0.13594,,,3.86,123.45,1.22058,52,0.896,2.7,122.7,49
+NoEast,Fraxinus pennsylvanica,FRPE,dbh,crown dia,meters,1/dbh,cub,-0.55792,0.48266,-0.00527,0.00002,,0.58,23.38,0.08497,44,0.923,0.7,24.7,40
+NoEast,Fraxinus pennsylvanica,FRPE,dbh,crown ht,meters,1/dbh,quad,1.38179,0.24946,-0.00095,,,1.98,17.63,0.19123,44,0.775,0.8,26.5,41
+NoEast,Fraxinus pennsylvanica,FRPE,age,dbh,centimeters,1/sqrt(age),cub,2.41764,1.4626,-0.02052,0.00016,,2.42,123.45,3.05806,41,0.947,2.7,122.7,37
+NoEast,Fraxinus pennsylvanica,FRPE,dbh,leaf area,sq. meters,1/sqrt(dbh),loglogw2,-1.51177,5.39015,0.06139,,,0.7,1234.45,0.24777,35,0.898,2.3,1217.3,33
+NoEast,Fraxinus pennsylvanica,FRPE,dbh,tree ht,meters,1,loglogw1,-0.00104,2.0008,0.04176,,,1.56,23.48,0.20436,44,0.866,2.2,34,42
+NoEast,Ginkgo biloba,GIBI,dbh,age,years,1/dbh^2,quad,2.00627,0.94391,0.00008,,,0,104,0.53569,82,0.844,2,85,79
+NoEast,Ginkgo biloba,GIBI,cdia,dbh,meters,1,loglogw1,1.79975,2.39243,0.10243,,,3.01,82.59,0.32004,32,0.871,1.1,106.2,30
+NoEast,Ginkgo biloba,GIBI,dbh,crown dia,meters,1/dbh,quad,0.56506,0.23562,-0.00074,,,1.01,15,0.07995,32,0.906,1.2,17.8,29
+NoEast,Ginkgo biloba,GIBI,dbh,crown ht,meters,1/dbh,quad,0.04776,0.3524,-0.00197,,,0.72,15.72,0.05556,33,0.95,1,19,30
+NoEast,Ginkgo biloba,GIBI,age,dbh,centimeters,1/age,quad,1.91918,1.0947,-0.00307,,,1.92,82.59,3.16976,82,0.85,1.1,106.2,79
+NoEast,Ginkgo biloba,GIBI,dbh,leaf area,sq. meters,1,loglogw1,-2.26741,5.50962,0.50117,,,0.48,508.49,0.70794,22,0.837,1.6,787.8,20
+NoEast,Ginkgo biloba,GIBI,dbh,tree ht,meters,1/dbh^2,quad,1.50395,0.44055,-0.00251,,,2.34,20.74,0.0023,33,0.96,3,23,30
+NoEast,Gleditsia triacanthos,GLTR,dbh,age,years,1/dbh^2,lin,-2.08484,0.69231,,,,1,150,0.02804,24,0.867,2,85,22
+NoEast,Gleditsia triacanthos,GLTR,cdia,dbh,meters,1/cdia^2,quad,0.72824,1.60241,0.11904,,,3.1,73.54,0.46563,34,0.938,5,94,31
+NoEast,Gleditsia triacanthos,GLTR,dbh,crown dia,meters,1,loglogw1,-0.48922,2.32541,0.01534,,,1.46,18.19,0.12384,33,0.969,1.1,19.3,31
+NoEast,Gleditsia triacanthos,GLTR,dbh,crown ht,meters,1,quad,2.40141,0.26137,-0.00119,,,3.23,15.04,5.56132,34,0.718,0.7,18,31
+NoEast,Gleditsia triacanthos,GLTR,age,dbh,centimeters,1,loglogw1,1.68387,1.59967,0.06782,,,3.23,71.86,0.26043,24,0.848,5,94,22
+NoEast,Gleditsia triacanthos,GLTR,dbh,leaf area,sq. meters,1,loglogw1,-0.69993,4.96614,0.16329,,,4.04,753.08,0.4041,24,0.941,1.2,1038,22
+NoEast,Gleditsia triacanthos,GLTR,dbh,tree ht,meters,1,quad,2.72568,0.40207,-0.00231,,,4,19.7,5.9453,34,0.805,2,22.5,31
+NoEast,Liquidambar styraciflua,LIST,dbh,age,years,1/dbh,lin,-2.20877,1.32556,,,,0,150,5.48442,94,0.847,2,135,92
+NoEast,Liquidambar styraciflua,LIST,cdia,dbh,meters,1/cdia^2,lin,-1.73388,4.54454,,,,3.42,80.14,0.80537,41,0.939,2.2,111.8,39
+NoEast,Liquidambar styraciflua,LIST,dbh,crown dia,meters,1/dbh^2,quad,0.20226,0.2869,-0.0009,,,1.17,17.39,0.00141,41,0.961,1,23.8,38
+NoEast,Liquidambar styraciflua,LIST,dbh,crown ht,meters,1/dbh^2,quad,0.78667,0.28607,-0.0012,,,1.75,16.03,0.00304,41,0.905,1.5,23,38
+NoEast,Liquidambar styraciflua,LIST,age,dbh,centimeters,1/age,quad,3.42364,0.88982,-0.00252,,,3.42,80.14,2.33638,94,0.855,2.2,111.8,91
+NoEast,Liquidambar styraciflua,LIST,dbh,leaf area,sq. meters,1/dbh^2,quad,-4.47012,1.90089,0.10895,,,3.31,847.69,6.48252,23,0.871,1.3,1507.1,20
+NoEast,Liquidambar styraciflua,LIST,dbh,tree ht,meters,1/dbh^2,cub,1.22713,0.4387,-0.00425,0.00002,,2.68,20.52,0.0039,41,0.924,2.2,27,37
+NoEast,Malus spp.,MA2,dbh,age,years,1/dbh,lin,-0.77187,1.14474,,,,0,58,1.64013,24,0.857,2,49,22
+NoEast,Malus spp.,MA2,cdia,dbh,meters,1,expow1,1.5206,0.23165,0.17096,,,2.85,46.08,0.41348,31,0.703,2,45.7,29
+NoEast,Malus spp.,MA2,dbh,crown dia,meters,1/dbh,quad,0.44624,0.33986,-0.00342,,,1.39,8.84,0.0962,31,0.792,1.1,11.7,28
+NoEast,Malus spp.,MA2,dbh,crown ht,meters,1,expow1,0.4298,0.03133,0.14681,,,1.81,7.01,0.38316,32,0.53,1,12.5,30
+NoEast,Malus spp.,MA2,age,dbh,centimeters,1/sqrt(age),lin,2.84705,0.74535,,,,2.85,46.08,3.92494,24,0.871,2,45.7,22
+NoEast,Malus spp.,MA2,dbh,leaf area,sq. meters,1/dbh^2,quad,-1.11868,0.92818,0.07216,,,2.11,194.86,1.11621,27,0.788,0.9,273.4,24
+NoEast,Malus spp.,MA2,dbh,tree ht,meters,1,expow1,1.0323,0.02559,0.0767,,,3.14,9.48,0.27694,31,0.576,2,15,29
+NoEast,Pinus strobus,PIST,dbh,age,years,1/dbh^2,quad,0.51428,0.55776,0.0201,,,1,131,0.04859,43,0.978,2,82,40
+NoEast,Pinus strobus,PIST,cdia,dbh,meters,1/cdia,lin,-1.44108,4.69962,,,,2.98,96.1,10.5671,32,0.88,2.2,95.4,30
+NoEast,Pinus strobus,PIST,dbh,crown dia,meters,1/dbh,quad,0.26428,0.28611,-0.00132,,,1.11,15.57,0.07608,32,0.908,1.6,16.8,29
+NoEast,Pinus strobus,PIST,dbh,crown ht,meters,1,loglogw1,-0.2013,1.97762,0.10026,,,1.66,16.91,0.31663,32,0.744,2,24,30
+NoEast,Pinus strobus,PIST,age,dbh,centimeters,1,cub,1.87523,1.11975,-0.01146,0.00006,,2.98,96.1,5.62031,43,0.972,2.2,95.4,39
+NoEast,Pinus strobus,PIST,dbh,leaf area,sq. meters,1/sqrt(dbh),loglogw2,-0.09073,4.05934,0.02352,,,3.47,491.72,0.15337,24,0.944,4.4,489.4,22
+NoEast,Pinus strobus,PIST,dbh,tree ht,meters,1,loglogw1,-0.28182,2.25935,0.04993,,,1.63,23.72,0.22345,32,0.884,2.5,27,30
+NoEast,Platanus x acerifolia,PLAC,dbh,age,years,1/dbh^2,cub,0.58171,0.30204,0.03224,-0.00037,,0,92,0.05463,49,0.901,2,104,45
+NoEast,Platanus x acerifolia,PLAC,cdia,dbh,meters,1/cdia^2,cub,2.40743,0.5252,0.40923,-0.00923,,3.69,61.76,0.72952,53,0.936,2.8,164.6,49
+NoEast,Platanus x acerifolia,PLAC,dbh,crown dia,meters,1,loglogw1,-0.75195,2.41418,0.01977,,,0.78,14.63,0.14059,53,0.942,2.4,25.6,51
+NoEast,Platanus x acerifolia,PLAC,dbh,crown ht,meters,1/dbh,quad,1.79463,0.22161,-0.00068,,,2.32,12.88,0.15151,53,0.82,2.5,29.5,50
+NoEast,Platanus x acerifolia,PLAC,age,dbh,centimeters,1/age,quad,2.40322,1.2942,-0.00705,,,2.4,61.76,1.9293,49,0.889,2.8,164.6,46
+NoEast,Platanus x acerifolia,PLAC,dbh,leaf area,sq. meters,1,loglogw1,-2.06877,5.77886,0.27978,,,0.76,562.5,0.52895,35,0.89,8.3,1760.5,33
+NoEast,Platanus x acerifolia,PLAC,dbh,tree ht,meters,1/dbh,quad,3.29515,0.30021,-0.00109,,,4.01,17.69,0.12837,53,0.892,5.5,33,50
+NoEast,Prunus serrulata,PRSE2,dbh,age,years,1/dbh,lin,-1.6058,0.62144,,,,0,58,0.1573,18,0.96,2,28,16
+NoEast,Prunus serrulata,PRSE2,cdia,dbh,meters,1/cdia^2,lin,-6.15295,5.34284,,,,5.14,92.51,1.31583,34,0.783,5.4,92.4,32
+NoEast,Prunus serrulata,PRSE2,dbh,crown dia,meters,1,cub,1.57321,0.29639,-0.00543,0.00004,,2.57,17.14,1.13385,34,0.803,2,17,30
+NoEast,Prunus serrulata,PRSE2,dbh,crown ht,meters,1,loglogw1,-1.06476,2.08051,0.11,,,0.9,8.22,0.33166,34,0.575,1,12,32
+NoEast,Prunus serrulata,PRSE2,age,dbh,centimeters,1/sqrt(age),lin,3.606,1.53283,,,,3.61,92.51,2.46664,18,0.962,5.4,92.4,16
+NoEast,Prunus serrulata,PRSE2,dbh,leaf area,sq. meters,1/dbh^2,cub,-18.045,4.6553,-0.12798,0.00198,,2.77,886.46,1.03283,31,0.806,3.1,880.9,27
+NoEast,Prunus serrulata,PRSE2,dbh,tree ht,meters,1/sqrt(dbh),loglogw2,0.20839,1.34422,0.00885,,,2.19,9.82,0.09405,34,0.659,3,15,32
+NoEast,Pyrus calleryana,PYCA,dbh,age,years,1,lin,-1.06138,0.61303,,,,0,40,3.08666,15,0.898,1,18,13
+NoEast,Pyrus calleryana,PYCA,cdia,dbh,meters,1/sqrt(cdia),lin,-0.3826,3.36484,,,,5.4,54.93,3.31629,33,0.959,5.3,50.5,31
+NoEast,Pyrus calleryana,PYCA,dbh,crown dia,meters,1/sqrt(dbh),lin,0.41182,0.28531,,,,1.59,16.08,0.15067,33,0.96,1,15.1,31
+NoEast,Pyrus calleryana,PYCA,dbh,crown ht,meters,1,loglogw1,-0.51013,2.04284,0.05353,,,1.7,10.46,0.23137,32,0.826,1.4,11.5,30
+NoEast,Pyrus calleryana,PYCA,age,dbh,centimeters,1/age^2,lin,4.13514,1.2698,,,,4.14,54.93,0.14818,15,0.838,5.3,50.5,13
+NoEast,Pyrus calleryana,PYCA,dbh,leaf area,sq. meters,1,loglogw1,-1.86944,5.60849,0.20744,,,3.44,437.87,0.45545,27,0.904,2.8,401.6,25
+NoEast,Pyrus calleryana,PYCA,dbh,tree ht,meters,1,loglogw1,0.39228,1.55901,0.02317,,,3.22,13.03,0.15221,33,0.865,3.2,14.5,31
+NoEast,Quercus palustris,QUPA,dbh,age,years,1/dbh,lin,1.76652,0.68508,,,,0,96,3.31406,64,0.813,2,95,62
+NoEast,Quercus palustris,QUPA,cdia,dbh,meters,1/cdia,cub,3.79953,-0.56987,0.51461,-0.01288,,2.86,127.63,4.66938,54,0.96,1.5,127.8,50
+NoEast,Quercus palustris,QUPA,dbh,crown dia,meters,1/dbh,cub,0.58861,0.37575,-0.00351,0.00002,,1.63,28.44,0.05373,54,0.96,1.8,29.3,50
+NoEast,Quercus palustris,QUPA,dbh,crown ht,meters,1/sqrt(dbh),lin,1.99423,0.17497,,,,2.49,24.33,0.71153,54,0.893,2,25,52
+NoEast,Quercus palustris,QUPA,age,dbh,centimeters,1/age,lin,2.85629,1.29969,,,,2.86,127.63,6.77089,64,0.85,1.5,127.8,62
+NoEast,Quercus palustris,QUPA,dbh,leaf area,sq. meters,1/dbh^2,quad,-18.46077,5.04039,0.05296,,,3.4,1487.42,7.98933,37,0.871,0.1,1787.5,34
+NoEast,Quercus palustris,QUPA,dbh,tree ht,meters,1/dbh,lin,2.97948,0.24435,,,,3.68,34.17,0.14443,54,0.932,3,34,52
+NoEast,Quercus phellos,QUPH,dbh,age,years,1/sqrt(dbh),cub,-0.46592,0.39042,0.01441,-0.0001,,0,102,0.76173,34,0.991,2,80,30
+NoEast,Quercus phellos,QUPH,cdia,dbh,meters,1/cdia^2,quad,-0.68446,3.06303,0.0783,,,5.31,121.05,0.55736,33,0.931,4.8,113,30
+NoEast,Quercus phellos,QUPH,dbh,crown dia,meters,1/dbh,quad,0.87983,0.27243,-0.00077,,,2,22.61,0.06102,33,0.942,1.8,23.7,30
+NoEast,Quercus phellos,QUPH,dbh,crown ht,meters,1,loglogw1,-0.39341,2.08108,0.03402,,,1.93,17.82,0.18445,32,0.908,2,20,30
+NoEast,Quercus phellos,QUPH,age,dbh,centimeters,1/age,lin,4.16427,1.14593,,,,4.16,121.05,0.68411,34,0.972,4.8,113,32
+NoEast,Quercus phellos,QUPH,dbh,leaf area,sq. meters,1,loglogw1,-1.36078,5.25688,0.16177,,,4.47,1072.62,0.40221,23,0.936,5,1359.8,21
+NoEast,Quercus phellos,QUPH,dbh,tree ht,meters,1,loglogw1,0.20016,1.85242,0.01859,,,3.09,22.45,0.13634,33,0.935,4,24,31
+NoEast,Quercus rubra,QURU,dbh,age,years,1/dbh,lin,0.01607,1.01679,,,,0,150,2.29035,76,0.918,2,95,74
+NoEast,Quercus rubra,QURU,cdia,dbh,meters,1/cdia^2,cub,0.78521,0.91658,0.35987,-0.00806,,2.9,139.63,0.6026,51,0.954,2.1,171.7,47
+NoEast,Quercus rubra,QURU,dbh,crown dia,meters,1/dbh,quad,1.13733,0.27575,-0.00076,,,1.93,24.89,0.06775,51,0.958,1.4,31.3,48
+NoEast,Quercus rubra,QURU,dbh,crown ht,meters,1/dbh,quad,1.45116,0.25138,-0.00092,,,2.17,18.57,0.17356,51,0.847,1.5,27.5,48
+NoEast,Quercus rubra,QURU,age,dbh,centimeters,1/sqrt(age),lin,2.89687,0.91156,,,,2.9,139.63,13.68468,76,0.908,2.1,171.7,74
+NoEast,Quercus rubra,QURU,dbh,leaf area,sq. meters,1/dbh^2,cub,-3.02473,1.36611,0.20228,-0.00112,,2.6,1150.14,7.38729,28,0.884,0.8,1498.4,24
+NoEast,Quercus rubra,QURU,dbh,tree ht,meters,1/dbh,quad,2.98261,0.30808,-0.00105,,,3.87,25.59,0.14092,51,0.918,3.5,31.5,48
+NoEast,Tilia cordata,TICO,dbh,age,years,1/dbh^2,cub,-0.31291,0.44918,0.0172,-0.00011,,0,143,0.05054,113,0.926,2,95,109
+NoEast,Tilia cordata,TICO,cdia,dbh,meters,1/cdia^2,cub,5.41842,-0.83626,0.72205,-0.02197,,2.71,131.1,1.36303,48,0.918,3.2,130,44
+NoEast,Tilia cordata,TICO,dbh,crown dia,meters,1/dbh^2,cub,-1.14976,0.44387,-0.00442,0.00002,,0.61,18.82,0.00112,48,0.961,0.9,20.2,44
+NoEast,Tilia cordata,TICO,dbh,crown ht,meters,1/dbh,quad,1.94287,0.21056,-0.00074,,,2.51,16.88,0.12142,48,0.811,2,20,45
+NoEast,Tilia cordata,TICO,age,dbh,centimeters,1/age,cub,2.70741,1.43292,-0.01191,0.00006,,2.71,131.1,1.5684,113,0.94,3.2,130,109
+NoEast,Tilia cordata,TICO,dbh,leaf area,sq. meters,1,loglogw1,-2.54333,5.93939,0.31081,,,0.76,1166.66,0.55751,37,0.877,1,2182.6,35
+NoEast,Tilia cordata,TICO,dbh,tree ht,meters,1/dbh,quad,2.91533,0.27146,-0.00098,,,3.64,21.74,0.1192,48,0.877,4,24.5,45
+NoEast,Tilia tomentosa,TITO,dbh,age,years,1,expow1,1.29182,0.06238,0.46843,,,1,150,0.68442,26,0.522,2,72,24
+NoEast,Tilia tomentosa,TITO,cdia,dbh,meters,1,loglogw1,1.77396,2.10147,0.06553,,,2.62,50.34,0.256,30,0.886,1.8,83.8,28
+NoEast,Tilia tomentosa,TITO,dbh,crown dia,meters,1/sqrt(dbh),loglogw2,-1.14455,2.59113,0.00931,,,0.75,10.7,0.09648,30,0.928,1.1,18.1,28
+NoEast,Tilia tomentosa,TITO,dbh,crown ht,meters,1/dbh,quad,0.08359,0.36145,-0.00298,,,1.15,10.34,0.05995,30,0.882,1,14,27
+NoEast,Tilia tomentosa,TITO,age,dbh,centimeters,1,loglogw1,1.36034,1.49373,0.29856,,,3.02,45.3,0.5464,26,0.53,1.8,83.8,24
+NoEast,Tilia tomentosa,TITO,dbh,leaf area,sq. meters,1,loglogw1,-2.06999,5.76406,0.26615,,,1.43,355.94,0.51589,28,0.887,1.4,690.6,26
+NoEast,Tilia tomentosa,TITO,dbh,tree ht,meters,1,loglogw1,0.2228,1.69429,0.01134,,,2.2,12.22,0.1065,30,0.942,3,17,28
+NoEast,Ulmus americana,ULAM,dbh,age,years,1/dbh,lin,-1.24865,0.70723,,,,0,97,1.3755,44,0.916,2,104,42
+NoEast,Ulmus americana,ULAM,cdia,dbh,meters,1/cdia,lin,-3.75496,4.5953,,,,6.61,132.97,15.04786,40,0.874,5.5,155.7,38
+NoEast,Ulmus americana,ULAM,dbh,crown dia,meters,1/dbh,cub,2.38566,0.12102,0.0024,-0.00002,,3.09,24.36,0.10918,40,0.927,2.1,26,36
+NoEast,Ulmus americana,ULAM,dbh,crown ht,meters,1/sqrt(dbh),loglogw2,0.31149,1.5835,0.00556,,,3.61,17.45,0.07459,40,0.915,2.2,25.5,38
+NoEast,Ulmus americana,ULAM,age,dbh,centimeters,1/age,lin,5.28982,1.31631,,,,5.29,132.97,4.93512,44,0.9,5.5,155.7,42
+NoEast,Ulmus americana,ULAM,dbh,leaf area,sq. meters,1/sqrt(dbh),loglogw2,-0.43434,4.68718,0.03337,,,11.7,1345.88,0.18267,30,0.949,3.4,2229.1,28
+NoEast,Ulmus americana,ULAM,dbh,tree ht,meters,1/dbh^2,quad,2.72347,0.31773,-0.00119,,,4.37,23.9,0.00251,40,0.938,3.6,30,37
+NoEast,Zelkova serrata,ZESE,dbh,age,years,1/dbh,cub,-1.109,1.1192,-0.0227,0.00025,,0,60,1.06112,41,0.855,2,31,37
+NoEast,Zelkova serrata,ZESE,cdia,dbh,meters,1/cdia^2,quad,-0.44053,2.18008,0.11187,,,3.5,81.63,0.1189,34,0.979,2.9,77.5,31
+NoEast,Zelkova serrata,ZESE,dbh,crown dia,meters,1,loglogw1,-0.6785,2.39897,0.00585,,,0.72,17.91,0.07648,34,0.979,2.2,18.5,32
+NoEast,Zelkova serrata,ZESE,dbh,crown ht,meters,1,loglogw1,-1.05694,2.5337,0.04988,,,0.53,15.17,0.22334,34,0.857,1.5,19,32
+NoEast,Zelkova serrata,ZESE,age,dbh,centimeters,1/age,lin,2.17317,1.32424,,,,2.17,81.63,3.55447,41,0.843,2.9,77.5,39
+NoEast,Zelkova serrata,ZESE,dbh,leaf area,sq. meters,1,loglogw1,-1.52867,5.57994,0.11267,,,0.63,922.9,0.33566,30,0.932,3.8,1264.1,28
+NoEast,Zelkova serrata,ZESE,dbh,tree ht,meters,1,loglogw1,0.01056,1.93455,0.0362,,,1.38,18.01,0.19026,34,0.827,3.5,23,32
