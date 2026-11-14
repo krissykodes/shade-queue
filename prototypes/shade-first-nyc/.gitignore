@@ -1,0 +1,6 @@
+# Rebuilt by the scripts (see README): raw pulls, per-ZIP outputs, packed map data, built pages
+data/*
+!data/tree_sizes.json
+web/data/
+web/page.html
+web/index.html
