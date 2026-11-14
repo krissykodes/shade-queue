@@ -1,0 +1,544 @@
+<title>Shade First NYC</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>/*MAPLIBRE_CSS*/</style>
+<style>
+/* Layout: full-bleed map; a story panel docked left (desktop) or as a bottom sheet (phone). */
+:root {
+  --bg: #f6f5f1; --panel: #ffffff; --fg: #1d2421; --muted: #5d6762; --line: #dfe2dc; --soft: #f1f3ef;
+  --accent: #1f7a4f; --accent-soft: #e3f1e8;
+  --map-bg: #eceee8; --sidewalk: #d6d9d1; --bldg: #c3c6bd; --ink: #29312d; --addr: #7a3fb0;
+  --hvi1: #f4ecd2; --hvi2: #f1cf96; --hvi3: #e9a160; --hvi4: #d66a34; --hvi5: #a5361b;
+  --s0: #b9b3c4; --s1: #8fb5a4; --s2: #3f9a72; --s3: #11683f; --top: #0b3d26;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121614; --panel: #1a1f1c; --fg: #e7ebe8; --muted: #9aa39e; --line: #2c3430; --soft: #212724;
+  --accent: #5cc48f; --accent-soft: #1d3328;
+  --map-bg: #161b18; --sidewalk: #2b322e; --bldg: #39413c; --ink: #d9dfdb; --addr: #c99bf2;
+  --hvi1: #3a3626; --hvi2: #5e4a26; --hvi3: #85502a; --hvi4: #a8512a; --hvi5: #c8452a;
+  --s0: #5d5868; --s1: #5f8f7b; --s2: #48b583; --s3: #8ff0bd; --top: #d8ffe9; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #121614; --panel: #1a1f1c; --fg: #e7ebe8; --muted: #9aa39e; --line: #2c3430; --soft: #212724;
+  --accent: #5cc48f; --accent-soft: #1d3328;
+  --map-bg: #161b18; --sidewalk: #2b322e; --bldg: #39413c; --ink: #d9dfdb; --addr: #c99bf2;
+  --hvi1: #3a3626; --hvi2: #5e4a26; --hvi3: #85502a; --hvi4: #a8512a; --hvi5: #c8452a;
+  --s0: #5d5868; --s1: #5f8f7b; --s2: #48b583; --s3: #8ff0bd; --top: #d8ffe9; color-scheme: dark; }
+
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 14px; line-height: 1.5; overflow: hidden; }
+.app { position: relative; height: 100%; display: grid; grid-template-columns: 400px 1fr; }
+#map { position: relative; min-width: 0; height: 100%; background: var(--map-bg); }
+.panel { background: var(--panel); border-right: 1px solid var(--line); overflow-y: auto; min-width: 0;
+  padding-block: 20px 28px; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: 20px;
+  display: flex; flex-direction: column; gap: 18px; z-index: 2; }
+h1 { font-size: 24px; line-height: 1.15; font-weight: 800; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+h2 { font-size: 17px; line-height: 1.25; font-weight: 700; margin: 0; text-wrap: balance; }
+.lede { color: var(--muted); margin: 4px 0 0; }
+.steps, .seg { display: grid; gap: 6px; }
+.steps { grid-template-columns: repeat(3, 1fr); }
+.seg.two { grid-template-columns: 1fr 1fr; }
+.seg.four { grid-template-columns: repeat(4, 1fr); }
+.steps button, .seg button { font: inherit; font-size: 12.5px; font-weight: 600; text-align: left; padding: 8px 10px; border-radius: 6px;
+  border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.seg.four button { text-align: center; align-items: center; }
+.steps button .n, .seg button .n { font-family: var(--font-mono); font-size: 11px; font-weight: 500; }
+.steps button[aria-pressed="true"], .seg button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--fg); }
+button:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.step { display: flex; flex-direction: column; gap: 14px; }
+.step p { margin: 0; max-width: 62ch; }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.big { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 28px; font-weight: 500; line-height: 1; letter-spacing: -0.02em; }
+.kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+.kpi { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.kpi .lbl { font-size: 12px; color: var(--muted); }
+.kpi.hero .big { color: var(--accent); }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.legend { display: flex; flex-direction: column; gap: 5px; }
+.lrow { display: grid; grid-template-columns: 14px 64px 1fr 56px; align-items: center; gap: 8px; font-size: 12.5px; }
+.sw { width: 14px; height: 14px; border-radius: 3px; }
+.bar { height: 8px; border-radius: 2px; background: var(--ink); opacity: .55; }
+.lrow .v { text-align: right; }
+.ramp { height: 10px; border-radius: 2px; background: linear-gradient(90deg, var(--s0), var(--s1), var(--s2), var(--s3)); }
+.ramp-l { display: flex; justify-content: space-between; gap: 12px; font-size: 11.5px; color: var(--muted); }
+.ctrl { display: flex; flex-direction: column; gap: 6px; }
+.ctrl label { display: flex; justify-content: space-between; font-weight: 600; font-size: 13px; }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.toggles { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; }
+.toggles label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.toggles input { accent-color: var(--accent); }
+.note { font-size: 12.5px; color: var(--muted); border-left: 3px solid var(--hvi4); padding: 2px 0 2px 10px; }
+.treeline { font-size: 13px; background: var(--soft); border-radius: 6px; padding: 10px 12px; }
+.addr { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--addr); border-radius: 8px; padding: 12px 14px; }
+.addr .eyebrow { color: var(--addr); }
+.picks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.picks button { width: 100%; font: inherit; font-size: 12.5px; display: grid; grid-template-columns: 1fr auto; gap: 8px; text-align: left;
+  background: transparent; border: 0; border-top: 1px solid var(--line); padding: 6px 0 2px; color: var(--fg); cursor: pointer; }
+.picks button:hover .pa { text-decoration: underline; }
+.picks .pm { color: var(--muted); font-family: var(--font-mono); font-size: 11.5px; white-space: nowrap; }
+.explain { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+.explain dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; }
+.explain dt { font-weight: 700; }
+.explain dd { margin: 0; color: var(--muted); }
+details { border-top: 1px solid var(--line); padding-top: 12px; font-size: 13px; }
+details summary { cursor: pointer; font-weight: 600; }
+details ul { padding-left: 18px; margin: 8px 0 0; color: var(--muted); display: flex; flex-direction: column; gap: 5px; }
+svg text { fill: var(--muted); font-family: var(--font-mono); font-size: 10px; }
+.curve-wrap svg { width: 100%; height: auto; display: block; }
+.hint { font-size: 12.5px; color: var(--muted); }
+.loading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 13px; z-index: 5; pointer-events: none; }
+.maplibregl-popup-content { background: var(--panel); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; font-family: var(--font-body); box-shadow: 0 6px 22px rgba(0,0,0,.18); }
+.maplibregl-popup-tip { border-top-color: var(--panel) !important; border-bottom-color: var(--panel) !important; }
+.maplibregl-popup-close-button { color: var(--muted); font-size: 18px; padding: 0 6px; }
+.pp { display: flex; flex-direction: column; gap: 8px; min-width: 220px; }
+.pp h3 { margin: 0; font-size: 14px; }
+.pp .sub { color: var(--muted); font-size: 12px; margin-top: -6px; }
+.pp .row { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; }
+.pp .plain { font-size: 12.5px; color: var(--muted); }
+.tb { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; align-items: end; height: 40px; }
+.tb div { background: var(--accent); border-radius: 2px 2px 0 0; min-height: 2px; }
+.tbl { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; font-family: var(--font-mono); font-size: 10px; color: var(--muted); text-align: center; }
+.chip { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.chip.warn { background: transparent; border: 1px solid var(--hvi4); color: var(--hvi4); }
+.addr-pin { width: 16px; height: 16px; border-radius: 50%; background: var(--addr); border: 3px solid var(--panel); box-shadow: 0 0 0 2px var(--addr); }
+.addr-tag { position: absolute; left: 22px; top: -4px; white-space: nowrap; background: var(--panel); color: var(--fg); border: 1px solid var(--addr); border-radius: 4px; padding: 1px 6px; font-size: 11.5px; font-weight: 700; }
+.maplibregl-ctrl-group { background: var(--panel); }
+.maplibregl-ctrl-group button + button { border-top-color: var(--line); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .maplibregl-ctrl button .maplibregl-ctrl-icon { filter: invert(1); } }
+:root[data-theme="dark"] .maplibregl-ctrl button .maplibregl-ctrl-icon { filter: invert(1); }
+@media (max-width: 760px) {
+  .app { grid-template-columns: 1fr; grid-template-rows: 44% 56%; }
+  #map { grid-row: 1; }
+  .panel { grid-row: 2; border-right: 0; border-top: 1px solid var(--line);
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 14px 24px; }
+  h1 { font-size: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="app">
+  <aside class="panel" aria-label="Story">
+    <header>
+      <h1>Shade First NYC</h1>
+      <p class="lede">Which empty street-tree pits should NYC Parks plant first to shade the most sidewalk?</p>
+    </header>
+
+    <nav class="steps" aria-label="Story steps">
+      <button id="b1" data-step="1" aria-pressed="true"><span class="n">1</span>Heat risk</button>
+      <button id="b2" data-step="2" aria-pressed="false"><span class="n">2</span>Empty pits</button>
+      <button id="b3" data-step="3" aria-pressed="false"><span class="n">3</span>Rank in a ZIP</button>
+    </nav>
+
+    <section class="step" id="s1">
+      <p>Parks' Neighborhood Tree Planting Program takes neighborhoods in order of the Health Department's <b>Heat Vulnerability Index</b>, HVI 5 first. HVI is scored per ZIP, so every pit in a ZIP gets the same priority.</p>
+      <div class="eyebrow">Mapped empty street pits by ZIP HVI</div>
+      <div class="legend" id="hviLegend"></div>
+      <p class="hint">Example: South Jamaica (11434) and Queens Village (11429) are both HVI 5. One is 9% vacant, the other 35%. HVI can't separate them, and it says nothing about which pit to plant.</p>
+    </section>
+
+    <section class="step" id="s2" hidden>
+      <div class="kpis">
+        <div class="kpi"><span class="big" id="kMapped">–</span><span class="lbl">empty street pits on the map</span></div>
+        <div class="kpi"><span class="big" id="kShown">–</span><span class="lbl">shown at current HVI filter</span></div>
+      </div>
+      <div class="ctrl">
+        <label for="hviMin"><span>Show ZIPs with HVI at least</span><span class="mono" id="hviMinV">1</span></label>
+        <input type="range" id="hviMin" min="1" max="5" step="1" value="1">
+      </div>
+      <p class="note"><b class="mono" id="kBad">–</b> more <code>Empty</code> records (<span id="kBadPct">–</span>) carry a placeholder coordinate in Pennsylvania (-77.52, 40.11) and can't be mapped as recorded. In the ranked ZIPs we placed them from their street address.</p>
+    </section>
+
+    <section class="step" id="s3" hidden>
+      <div class="seg two" role="group" aria-label="Ranked area">
+        <button id="z10026" data-zip="10026" aria-pressed="true"><span class="n">10026</span>Central Harlem</button>
+        <button id="z11429" data-zip="11429" aria-pressed="false"><span class="n">11429</span>Queens Village</button>
+      </div>
+
+      <div class="addr" id="addrBox">
+        <div class="eyebrow">Heat impact for 191 West 116th Street</div>
+        <p id="addrText">–</p>
+        <ul class="picks" id="addrPicks"></ul>
+      </div>
+
+      <p id="zipText">–</p>
+
+      <div class="ctrl">
+        <div class="eyebrow">How old is the tree?</div>
+        <div class="seg four" role="group" aria-label="Years after planting">
+          <button data-age="5" aria-pressed="false"><span class="n">5</span>years</button>
+          <button data-age="10" aria-pressed="true"><span class="n">10</span>years</button>
+          <button data-age="15" aria-pressed="false"><span class="n">15</span>years</button>
+          <button data-age="25" aria-pressed="false"><span class="n">25</span>years</button>
+        </div>
+        <div class="treeline" id="treeLine">–</div>
+      </div>
+
+      <div class="ctrl">
+        <label for="topN"><span>Plant the top</span><span class="mono"><span id="topNV">50</span> pits</span></label>
+        <input type="range" id="topN" min="10" max="445" step="5" value="50">
+      </div>
+      <div class="kpis">
+        <div class="kpi hero"><span class="big" id="kShare">–</span><span class="lbl">of all the new sidewalk shade this ZIP's empty pits could give</span></div>
+        <div class="kpi"><span class="big" id="kBase">–</span><span class="lbl">if the same number were planted in no particular order</span></div>
+        <div class="kpi"><span class="big" id="kSqft">–</span><span class="lbl">sq ft of sunny sidewalk shaded, 2–4 pm (<span id="kPark">–</span> parking spaces)</span></div>
+        <div class="kpi"><span class="big" id="kLift">–</span><span class="lbl">more shade per tree than planting in no particular order</span></div>
+      </div>
+      <div class="curve-wrap" id="curve" aria-label="Cumulative shade curve"></div>
+      <div class="ctrl">
+        <div class="eyebrow">Shade yield if planted</div>
+        <div class="ramp"></div>
+        <div class="ramp-l"><span>None of the shadow lands on sunny sidewalk</span><span>All of it does</span></div>
+      </div>
+      <div class="toggles">
+        <label><input type="checkbox" id="t3d"> 3D buildings</label>
+        <label><input type="checkbox" id="tSw" checked> Sidewalks</label>
+        <label><input type="checkbox" id="tTop"> Top pits only</label>
+      </div>
+
+      <div class="explain">
+        <div class="eyebrow">Reading the numbers</div>
+        <dl>
+          <dt>Shade yield</dt><dd>How much of a new tree's afternoon shadow would fall on sidewalk that is sunny today. 1.0 means all of it; 0 means it would land on the road, a yard, or a spot a building or tree already shades.</dd>
+          <dt>Sq ft shaded</dt><dd>The patch of sunny sidewalk the tree keeps in shade, on average, from 2 to 4 pm on a mid-July day. A parking space is about 160 sq ft (9 × 18 ft).</dd>
+          <dt>Tree age</dt><dd>Years after planting. Size comes from measured growth of Queens street trees (USDA Forest Service).</dd>
+        </dl>
+      </div>
+      <p class="hint">Click a pit to see its rank and the five afternoon shadows a tree there would cast.</p>
+    </section>
+
+    <details>
+      <summary>Method and data</summary>
+      <ul>
+        <li>Pits: NYC Parks Forestry Planting Spaces (<span class="mono">82zj-84is</span>), <code>psstatus = Empty</code>, <code>pssite = Street</code>, pulled Nov 14 2026.</li>
+        <li>Heat: DOHMH Heat Vulnerability Index by ZCTA (<span class="mono">4mhf-duep</span>), used as published. No demographic data enters the pit score.</li>
+        <li>Sun: NOAA solar position for July 15, 2–4 pm EDT, every 30 minutes. The sun moves from southwest and high (67° up) toward the west (48° up).</li>
+        <li>Tree size by years after planting: USDA Forest Service Urban Tree Database (RDS-2016-0005), growth equations for 21 street-tree species measured in Queens, median across species.</li>
+        <li>The tree's shadow is checked at 17 spots per time step. A spot counts if it is on sidewalk (<span class="mono">52n9-sdep</span>), not in a building's shadow (Building Footprints <span class="mono">5zhs-2jue</span>, roof heights) and not in an existing street tree's shadow (Forestry Tree Points <span class="mono">hn5i-inap</span>, sized from trunk diameter).</li>
+        <li id="checksLi">Checks: –</li>
+        <li>Limits: flat ground, one typical species, no awnings or scaffolding. Pit viability inspections are not yet joined. 191 W 116th St is placed approximately, from neighbouring addresses.</li>
+      </ul>
+    </details>
+  </aside>
+  <div id="map"><div class="loading" id="loading">Loading 83,506 pits…</div></div>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(() => {
+const ZIPS = ["10026", "11429"];
+const ZIPNAME = { "10026": "Central Harlem", "11429": "Queens Village" };
+const DEFAULT_TOP = { "10026": 50, "11429": 200 };
+const ADDR = { label: "191 W 116th St", lon: -73.9523, lat: 40.8033, zip: "10026" };
+const WALK_M = 400;            // about a 5-minute walk, a quarter mile
+const FT = 3.28084, SQFT = 10.7639, PARKING_SQFT = 162;
+const SUNT = ["2:00", "2:30", "3:00", "3:30", "4:00"];
+
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const fmt = n => Math.round(n).toLocaleString("en-US");
+const pct = x => (x * 100).toFixed(x < 0.1 && x > 0 ? 1 : 0) + "%";
+const $ = id => document.getElementById(id);
+const ft = m => Math.round(m * FT);
+const storeys = m => Math.max(1, Math.round(m * FT / 10));
+
+const map = new maplibregl.Map({
+  container: "map",
+  style: { version: 8, sources: {}, layers: [{ id: "bg", type: "background", paint: { "background-color": css("--map-bg") } }] },
+  center: [-73.94, 40.705], zoom: 9.7, minZoom: 9, maxZoom: 19, attributionControl: false
+});
+window.__map = map;
+map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
+map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: "NYC Open Data · NYC Parks · DOHMH · DCP · USDA FS" }));
+map.once("load", () => { const at = document.querySelector(".maplibregl-ctrl-attrib"); if (at) { at.classList.remove("maplibregl-compact-show"); at.removeAttribute("open"); } });
+setTimeout(() => { const at = document.querySelector(".maplibregl-ctrl-attrib"); if (at) { at.classList.remove("maplibregl-compact-show"); at.removeAttribute("open"); } }, 1500);
+
+const J = p => fetch(p).then(r => { if (!r.ok) throw new Error(p + " " + r.status); return r.json(); });
+const styleReady = new Promise(r => { const ok = () => map.isStyleLoaded() && (r(), true); if (!ok()) { map.on("styledata", ok); map.on("load", r); setTimeout(function t() { ok() || setTimeout(t, 100); }, 100); } });
+let stats, step = 1, zip = "10026", age = "10", topN = 50, popup;
+const Z = {};   // per-ZIP data: shade, sw, bl, sorted scores per age
+
+Promise.all([J("data/pits.json"), J("data/hvi.json"), J("data/stats.json"),
+  ...ZIPS.flatMap(z => [J(`data/shade_${z}.json`), J(`data/sidewalks_${z}.json`), J(`data/buildings_${z}.json`)]), styleReady])
+.then(([flat, hvi, st, ...rest]) => {
+  stats = st;
+  ZIPS.forEach((z, i) => { Z[z] = { shade: rest[i * 3], sw: rest[i * 3 + 1], bl: rest[i * 3 + 2] }; });
+  const feats = new Array(flat.length / 3);
+  for (let i = 0, j = 0; i < flat.length; i += 3, j++)
+    feats[j] = { type: "Feature", properties: { h: flat[i + 2] }, geometry: { type: "Point", coordinates: [flat[i], flat[i + 1]] } };
+  window.__pitCount = feats.length;
+  const empty = { type: "FeatureCollection", features: [] };
+
+  map.addSource("hvi", { type: "geojson", data: hvi });
+  map.addSource("pits", { type: "geojson", data: { type: "FeatureCollection", features: feats } });
+  map.addSource("sw", { type: "geojson", data: empty });
+  map.addSource("bl", { type: "geojson", data: empty });
+  map.addSource("shade", { type: "geojson", data: empty });
+  map.addSource("shadow", { type: "geojson", data: empty });
+  map.addSource("walk", { type: "geojson", data: circle(ADDR.lon, ADDR.lat, WALK_M) });
+
+  map.addLayer({ id: "hvi-fill", type: "fill", source: "hvi", paint: { "fill-opacity": ["interpolate", ["linear"], ["zoom"], 10, 0.85, 12.5, 0.4, 13.5, 0.1] } });
+  map.addLayer({ id: "hvi-line", type: "line", source: "hvi", paint: { "line-width": ["interpolate", ["linear"], ["zoom"], 9, 0.3, 14, 1.2], "line-opacity": 0.5 } });
+  map.addLayer({ id: "zip-focus", type: "line", source: "hvi", filter: ["in", ["get", "zip"], ["literal", ZIPS]], paint: { "line-width": 2.5 } });
+  map.addLayer({ id: "sw", type: "fill", source: "sw", minzoom: 13, layout: { visibility: "none" } });
+  map.addLayer({ id: "bl", type: "fill", source: "bl", minzoom: 13, layout: { visibility: "none" } });
+  map.addLayer({ id: "bl3d", type: "fill-extrusion", source: "bl", minzoom: 13, layout: { visibility: "none" },
+    paint: { "fill-extrusion-height": ["get", "h"], "fill-extrusion-opacity": 0.85 } });
+  map.addLayer({ id: "walk", type: "line", source: "walk", layout: { visibility: "none" }, paint: { "line-width": 1.5, "line-dasharray": [2, 2] } });
+  map.addLayer({ id: "pits", type: "circle", source: "pits", layout: { visibility: "none" },
+    paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 9, 0.7, 12, 1.6, 15, 3.5],
+             "circle-opacity": ["interpolate", ["linear"], ["zoom"], 9, 0.45, 13, 0.8] } });
+  map.addLayer({ id: "shadow", type: "fill", source: "shadow", paint: { "fill-opacity": 0.22 } });
+  map.addLayer({ id: "shade", type: "circle", source: "shade", layout: { visibility: "none" } });
+
+  const pinEl = document.createElement("div");
+  pinEl.innerHTML = `<div class="addr-pin"></div><div class="addr-tag">${ADDR.label}</div>`;
+  window.__pin = new maplibregl.Marker({ element: pinEl, anchor: "center" }).setLngLat([ADDR.lon, ADDR.lat]);
+
+  setupLegend(); setupCity(hvi); setupChecks();
+  applyTheme();
+  setZip("10026", false);
+  $("loading").hidden = true;
+  setStep(1, false);
+}).catch(e => { $("loading").textContent = "Couldn't load map data: " + e.message; });
+
+// ---------- geometry helpers
+function circle(lon, lat, r, n = 64, dx = 0, dy = 0) {
+  const kx = 111320 * Math.cos(lat * Math.PI / 180), ky = 110540, ring = [];
+  for (let i = 0; i <= n; i++) { const a = i / n * 2 * Math.PI; ring.push([lon + (dx + r * Math.cos(a)) / kx, lat + (dy + r * Math.sin(a)) / ky]); }
+  return { type: "Feature", properties: {}, geometry: { type: "Polygon", coordinates: [ring] } };
+}
+function distM(a, b) {
+  const kx = 111320 * Math.cos(a[1] * Math.PI / 180);
+  return Math.hypot((a[0] - b[0]) * kx, (a[1] - b[1]) * 110540);
+}
+
+// ---------- theme
+function applyTheme() {
+  map.setPaintProperty("bg", "background-color", css("--map-bg"));
+  if (!map.getLayer("hvi-fill")) return;
+  map.setPaintProperty("hvi-fill", "fill-color", ["match", ["get", "hvi"], 1, css("--hvi1"), 2, css("--hvi2"), 3, css("--hvi3"), 4, css("--hvi4"), 5, css("--hvi5"), css("--sidewalk")]);
+  map.setPaintProperty("hvi-line", "line-color", css("--panel"));
+  map.setPaintProperty("zip-focus", "line-color", css("--fg"));
+  map.setPaintProperty("sw", "fill-color", css("--sidewalk"));
+  map.setPaintProperty("bl", "fill-color", css("--bldg"));
+  map.setPaintProperty("bl3d", "fill-extrusion-color", css("--bldg"));
+  map.setPaintProperty("walk", "line-color", css("--addr"));
+  map.setPaintProperty("pits", "circle-color", css("--ink"));
+  map.setPaintProperty("shadow", "fill-color", css("--ink"));
+  map.setPaintProperty("shade", "circle-stroke-color", css("--top"));
+  paintShade();
+  drawCurve();
+}
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
+new MutationObserver(applyTheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+// ---------- steps 1 and 2
+function setupLegend() {
+  const by = stats.city.by_hvi, max = Math.max(...[1, 2, 3, 4, 5].map(k => by[k] || 0));
+  $("hviLegend").innerHTML = [5, 4, 3, 2, 1].map(k => `<div class="lrow"><span class="sw" style="background:var(--hvi${k})"></span>
+    <span>HVI ${k}</span><span class="bar" style="width:${(by[k] / max * 100).toFixed(1)}%"></span><span class="v mono">${fmt(by[k])}</span></div>`).join("");
+}
+let HVI;
+function setupCity(hvi) {
+  HVI = hvi;
+  const c = stats.city;
+  $("kMapped").textContent = fmt(c.empty_street_in_nyc);
+  $("kBad").textContent = fmt(c.dropped_bad_coords);
+  $("kBadPct").textContent = pct(c.dropped_bad_coords / c.empty_street_raw) + " of all";
+  updateShown();
+}
+function updateShown() {
+  const m = +$("hviMin").value; $("hviMinV").textContent = m;
+  let n = 0; for (let k = m; k <= 5; k++) n += stats.city.by_hvi[k] || 0;
+  $("kShown").textContent = fmt(n);
+  if (map.getLayer("pits")) map.setFilter("pits", [">=", ["get", "h"], m]);
+}
+$("hviMin").addEventListener("input", updateShown);
+
+function setupChecks() {
+  const c = stats.zips["10026"].checks, q = stats.zips["11429"].checks;
+  const ov = x => Math.round(x * 100) + "%";
+  $("checksLi").innerHTML = `Checks (10-year tree; top 50 in Harlem, top 200 in Queens Village): checking 49 spots instead of 17 keeps ${ov(c.samples_49_vs_17.top_n_overlap)} and ${ov(q.samples_49_vs_17.top_n_overlap)} of the top pits the same. Widening the window to noon–6 pm keeps ${ov(c.window_12_18_vs_14_16.top_n_overlap)} and ${ov(q.window_12_18_vs_14_16.top_n_overlap)}, so the choice of hours matters more than the sampling. Across tree ages (5 to 25 years), ${ov(Math.min(...Object.values(c.ages_vs_default).map(v => v.top_n_overlap)))} or more of Harlem's top pits stay the same, and ${ov(Math.min(...Object.values(q.ages_vs_default).map(v => v.top_n_overlap)))} or more of Queens Village's: there, young and older trees favour somewhat different pits.`;
+}
+
+// ---------- step 3
+function S() { return stats.zips[zip]; }
+function size() { return stats.tree_sizes.by_age[age]; }
+function sortedScores() {
+  const k = zip + age;
+  Z.cache = Z.cache || {};
+  return Z.cache[k] || (Z.cache[k] = Z[zip].shade.features.map(f => f.properties["s" + age]).sort((a, b) => b - a));
+}
+// average sunny-sidewalk area shaded over the 2-hour window, in sq ft, for a sum of yields
+const sqftFor = sumYield => sumYield * Math.PI * size().crown_radius_m ** 2 * SQFT;
+
+function setZip(z, fly = true) {
+  zip = z;
+  document.querySelectorAll("[data-zip]").forEach(b => b.setAttribute("aria-pressed", b.dataset.zip === z));
+  map.getSource("shade").setData(Z[z].shade);
+  map.getSource("sw").setData(Z[z].sw);
+  map.getSource("bl").setData(Z[z].bl);
+  if (popup) popup.remove();
+  const n = Z[z].shade.features.length;
+  $("topN").max = n;
+  $("topN").step = n > 600 ? 25 : 5;
+  topN = DEFAULT_TOP[z]; $("topN").value = topN;
+  $("addrBox").hidden = z !== ADDR.zip;
+  const hf = HVI.features.find(f => f.properties.zip === z);
+  const s = S();
+  $("zipText").innerHTML = `<b>${ZIPNAME[z]}, ${z}.</b> HVI ${hf ? hf.properties.hvi : "–"} of 5, <span class="mono">${fmt(s.records)}</span> empty street pits (${hf ? pct(s.records / (s.records + hf.properties.populated)) : "–"} of its street pits). The current program plants all of them in one pass. We rank each pit by how much new shade a tree there would put on sunny sidewalk on a July afternoon.`;
+  refresh();
+  if (fly && step === 3) flyZip();
+}
+document.querySelectorAll("[data-zip]").forEach(b => b.addEventListener("click", () => setZip(b.dataset.zip)));
+
+function setAge(a) {
+  age = a;
+  document.querySelectorAll("[data-age]").forEach(b => b.setAttribute("aria-pressed", b.dataset.age === a));
+  if (popup) popup.remove();
+  refresh();
+}
+document.querySelectorAll("[data-age]").forEach(b => b.addEventListener("click", () => setAge(b.dataset.age)));
+
+function refresh() {
+  const sz = size(), shadowSqft = Math.PI * sz.crown_radius_m ** 2 * SQFT;
+  $("treeLine").innerHTML = `A ${age}-year-old street tree stands about <b>${ft(sz.height_m)} ft</b> tall (roughly ${storeys(sz.height_m)} storeys) with a crown about <b>${ft(sz.crown_dia_m)} ft</b> across. Its shadow covers about <b>${fmt(shadowSqft)} sq ft</b>, ${shadowSqft < PARKING_SQFT * 0.75 ? "smaller than a parking space" : "about " + (shadowSqft / PARKING_SQFT).toFixed(1).replace(/\.0$/, "") + " parking spaces"}.`;
+  setTop(topN);
+  updateAddr();
+}
+
+function paintShade() {
+  if (!map.getLayer("shade")) return;
+  const isTop = ["<=", ["get", "r" + age], topN];
+  map.setPaintProperty("shade", "circle-color", ["interpolate", ["linear"], ["get", "s" + age], 0, css("--s0"), 0.2, css("--s1"), 0.45, css("--s2"), 0.8, css("--s3")]);
+  map.setPaintProperty("shade", "circle-radius", ["interpolate", ["linear"], ["zoom"], 12, ["case", isTop, 3.2, 1.6], 16, ["case", isTop, 7.5, 4], 18, ["case", isTop, 11, 6]]);
+  map.setPaintProperty("shade", "circle-stroke-width", ["interpolate", ["linear"], ["zoom"], 12, ["case", isTop, 1, 0], 16, ["case", isTop, 2, 0]]);
+  map.setPaintProperty("shade", "circle-opacity", ["case", isTop, 1, 0.7]);
+  map.setFilter("shade", $("tTop").checked ? isTop : null);
+}
+
+function setTop(n) {
+  const sorted = sortedScores();
+  topN = Math.min(n, sorted.length);
+  $("topNV").textContent = fmt(topN);
+  const total = sorted.reduce((a, b) => a + b, 0);
+  const top = sorted.slice(0, topN).reduce((a, b) => a + b, 0);
+  const share = total ? top / total : 0, base = topN / sorted.length;
+  $("kShare").textContent = pct(share);
+  $("kBase").textContent = pct(base);
+  const sq = sqftFor(top);
+  $("kSqft").textContent = fmt(sq);
+  $("kPark").textContent = fmt(sq / PARKING_SQFT);
+  $("kLift").textContent = base ? (share / base).toFixed(1) + "×" : "–";
+  paintShade();
+  drawCurve();
+  updateAddr();
+}
+$("topN").addEventListener("input", e => setTop(+e.target.value));
+$("tTop").addEventListener("change", () => setTop(topN));
+
+function updateAddr() {
+  if (zip !== ADDR.zip || !Z[zip]) return;
+  const near = Z[zip].shade.features.map(f => ({ f, d: distM([ADDR.lon, ADDR.lat], f.geometry.coordinates) }))
+    .filter(x => x.d <= WALK_M).sort((a, b) => a.f.properties["r" + age] - b.f.properties["r" + age]);
+  const inTop = near.filter(x => x.f.properties["r" + age] <= topN).length;
+  const allSq = sqftFor(near.reduce((a, x) => a + x.f.properties["s" + age], 0));
+  const zipHvi = (HVI.features.find(f => f.properties.zip === ADDR.zip) || { properties: {} }).properties.hvi;
+  $("addrText").innerHTML = `This block is in ZIP ${ADDR.zip}, heat risk <b>HVI ${zipHvi} of 5</b> (highest). Within a 5-minute walk (¼ mile, dashed circle) there are <b class="mono">${near.length}</b> empty tree pits. <b class="mono">${inTop}</b> of them are in the ZIP's top ${fmt(topN)}. Planting all ${near.length} would keep about <b class="mono">${fmt(allSq)}</b> sq ft of sunny sidewalk shaded on a July afternoon once the trees are ${age} years old. The best ones nearby:`;
+  $("addrPicks").innerHTML = near.slice(0, 4).map((x, i) => {
+    const p = x.f.properties;
+    return `<li><button data-pick="${i}"><span class="pa">${p.addr}</span><span class="pm">#${p["r" + age]} · ${fmt(x.d * FT)} ft away</span></button></li>`;
+  }).join("") || "<li class='hint'>No empty pits within a quarter mile.</li>";
+  $("addrPicks").querySelectorAll("[data-pick]").forEach(b => b.addEventListener("click", () => {
+    const f = near[+b.dataset.pick].f;
+    map.flyTo({ center: f.geometry.coordinates, zoom: 17.2, duration: 900 });
+    map.once("moveend", () => openPit(f));
+  }));
+}
+
+function drawCurve() {
+  if (!Z[zip]) return;
+  const sorted = sortedScores();
+  const W = 340, H = 150, L = 34, R = 8, T = 10, B = 26, n = sorted.length;
+  const total = sorted.reduce((a, b) => a + b, 0) || 1;
+  let acc = 0; const pts = [[0, 0]], stepN = Math.max(1, Math.round(n / 200));
+  sorted.forEach((s, i) => { acc += s; if (i % stepN === 0 || i === n - 1) pts.push([i + 1, acc / total]); });
+  const x = v => L + v / n * (W - L - R), y = v => T + (1 - v) * (H - T - B);
+  const path = pts.map((p, i) => (i ? "L" : "M") + x(p[0]).toFixed(1) + "," + y(p[1]).toFixed(1)).join("");
+  const at = sorted.slice(0, topN).reduce((a, b) => a + b, 0) / total;
+  const tick = n > 1000 ? 500 : 100;
+  const grid = [0, .25, .5, .75, 1].map(v => `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${L - 6}" y="${y(v) + 3}" text-anchor="end">${v * 100}%</text>`).join("");
+  const xt = []; for (let v = 0; v <= n; v += tick) xt.push(`<text x="${x(v)}" y="${H - B + 14}" text-anchor="middle">${fmt(v)}</text>`);
+  $("curve").innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Share of new sidewalk shade by number of pits planted in ranked order">
+    ${grid}${xt.join("")}
+    <path d="M${x(0)},${y(0)}L${x(n)},${y(1)}" stroke="var(--muted)" stroke-dasharray="3 3" fill="none"/>
+    <path d="${path}L${x(n)},${y(0)}Z" fill="var(--accent)" opacity=".12"/>
+    <path d="${path}" stroke="var(--accent)" stroke-width="2" fill="none"/>
+    <line x1="${x(topN)}" x2="${x(topN)}" y1="${y(0)}" y2="${y(at)}" stroke="var(--fg)" stroke-width="1"/>
+    <circle cx="${x(topN)}" cy="${y(at)}" r="4" fill="var(--accent)" stroke="var(--panel)" stroke-width="1.5"/>
+    <text x="${x(n) - 4}" y="${y(.12)}" text-anchor="end">no particular order</text>
+    <text x="${x(n * .3)}" y="${y(.9)}" style="fill:var(--accent)">best pits first</text>
+    <text x="${(L + W - R) / 2}" y="${H - 2}" text-anchor="middle">pits planted</text>
+  </svg>`;
+}
+
+// ---------- views
+function vis(id, on) { if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", on ? "visible" : "none"); }
+function flyZip() {
+  const harlem = zip === ADDR.zip, is3d = $("t3d").checked, phone = matchMedia("(max-width: 760px)").matches;
+  const v = harlem ? { center: [ADDR.lon, ADDR.lat], zoom: 15.2 } : { center: [-73.7405, 40.7108], zoom: 13.9 };
+  if (phone) v.zoom -= 0.8;
+  Object.assign(v, { pitch: is3d ? 55 : 0, bearing: is3d ? -28 : 0, duration: matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1600 });
+  map.flyTo(v);
+}
+function setStep(n, fly = true) {
+  step = n;
+  [1, 2, 3].forEach(k => { $("s" + k).hidden = k !== n; $("b" + k).setAttribute("aria-pressed", k === n); });
+  vis("pits", n === 2);
+  vis("shade", n === 3); vis("shadow", n === 3); vis("walk", n === 3);
+  vis("sw", n === 3 && $("tSw").checked);
+  vis("bl", n === 3 && !$("t3d").checked); vis("bl3d", n === 3 && $("t3d").checked);
+  vis("zip-focus", n !== 2);
+  if (n === 3) window.__pin.addTo(map); else window.__pin.remove();
+  if (n !== 3 && popup) popup.remove();
+  if (n === 3) return fly ? flyZip() : null;
+  const v = { center: [-73.94, 40.73], zoom: n === 1 ? 9.7 : 9.9, pitch: 0, bearing: 0 };
+  if (matchMedia("(max-width: 760px)").matches) v.zoom -= 0.6;
+  fly ? map.flyTo(Object.assign(v, { duration: 1400 })) : map.jumpTo(v);
+}
+document.querySelectorAll(".steps button").forEach(b => b.addEventListener("click", () => setStep(+b.dataset.step)));
+$("t3d").addEventListener("change", e => {
+  vis("bl", !e.target.checked); vis("bl3d", e.target.checked);
+  map.easeTo({ pitch: e.target.checked ? 55 : 0, bearing: e.target.checked ? -28 : 0, duration: 900 });
+});
+$("tSw").addEventListener("change", e => vis("sw", e.target.checked));
+
+// ---------- pit popup + its five afternoon shadows
+function openPit(f) {
+  const p = f.properties, [lon, lat] = f.geometry.coordinates, sz = size();
+  const tt = p["t" + age], bt = typeof tt === "string" ? JSON.parse(tt) : tt;
+  const geo = p.geocoded === true || p.geocoded === "true";
+  const y = +p["s" + age], sq = sqftFor(y), rank = +p["r" + age], n = sortedScores().length;
+  map.getSource("shadow").setData({ type: "FeatureCollection", features: S().sun.map(s => {
+    const off = sz.crown_center_m / Math.tan(s.elevation * Math.PI / 180), az = s.azimuth * Math.PI / 180;
+    return circle(lon, lat, sz.crown_radius_m, 28, -Math.sin(az) * off, -Math.cos(az) * off);
+  }) });
+  const dAddr = zip === ADDR.zip ? distM([ADDR.lon, ADDR.lat], [lon, lat]) : null;
+  const html = `<div class="pp"><h3>${p.addr}</h3><div class="sub">${p.on}${dAddr != null ? " · " + fmt(dAddr * FT) + " ft from " + ADDR.label : ""}</div>
+    <div class="row"><span>Rank in ${zip}</span><b class="mono">${fmt(rank)} of ${fmt(n)}</b></div>
+    <div class="row"><span>Shade yield</span><b class="mono">${y.toFixed(2)}</b></div>
+    <div class="row"><span>Sunny sidewalk shaded</span><b class="mono">${fmt(sq)} sq ft</b></div>
+    <div class="plain">At ${age} years, ${Math.round(y * 100)}% of this tree's shadow would land on sidewalk that is sunny today. That's about ${(sq / PARKING_SQFT).toFixed(1)} parking spaces of shade, 2–4 pm.</div>
+    <div class="tb">${bt.map(v => `<div style="height:${Math.max(4, v * 100)}%" title="${Math.round(v * 100)}%"></div>`).join("")}</div>
+    <div class="tbl">${SUNT.map(t => `<span>${t}</span>`).join("")}</div>
+    <div>${rank <= topN ? '<span class="chip">In top ' + fmt(topN) + '</span> ' : ""}${geo ? '<span class="chip warn">Location from street address</span>' : ""}</div></div>`;
+  if (popup) popup.remove();
+  popup = new maplibregl.Popup({ maxWidth: "290px", offset: 10 }).setLngLat([lon, lat]).setHTML(html).addTo(map);
+  popup.on("close", () => map.getSource("shadow").setData({ type: "FeatureCollection", features: [] }));
+}
+map.on("click", "shade", e => openPit(e.features[0]));
+map.on("mouseenter", "shade", () => map.getCanvas().style.cursor = "pointer");
+map.on("mouseleave", "shade", () => map.getCanvas().style.cursor = "");
+})();
+</script>

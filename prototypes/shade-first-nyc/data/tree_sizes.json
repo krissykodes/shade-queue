@@ -1,0 +1,338 @@
+{
+ "source": "USDA FS Urban Tree Database RDS-2016-0005, Northeast region (Queens, NY), median of 21 species",
+ "species": [
+  "Acer platanoides",
+  "Acer rubrum",
+  "Acer saccharinum",
+  "Acer saccharum",
+  "Aesculus hippocastanum",
+  "Fraxinus pennsylvanica",
+  "Ginkgo biloba",
+  "Gleditsia triacanthos",
+  "Liquidambar styraciflua",
+  "Malus spp.",
+  "Pinus strobus",
+  "Platanus x acerifolia",
+  "Prunus serrulata",
+  "Pyrus calleryana",
+  "Quercus palustris",
+  "Quercus phellos",
+  "Quercus rubra",
+  "Tilia cordata",
+  "Tilia tomentosa",
+  "Ulmus americana",
+  "Zelkova serrata"
+ ],
+ "by_age": {
+  "5": {
+   "height_m": 5.27,
+   "crown_dia_m": 3.4,
+   "crown_center_m": 3.46,
+   "crown_radius_m": 1.7,
+   "dbh_cm": 9.2
+  },
+  "10": {
+   "height_m": 6.85,
+   "crown_dia_m": 4.95,
+   "crown_center_m": 4.44,
+   "crown_radius_m": 2.47,
+   "dbh_cm": 15.2
+  },
+  "15": {
+   "height_m": 8.44,
+   "crown_dia_m": 6.35,
+   "crown_center_m": 5.44,
+   "crown_radius_m": 3.17,
+   "dbh_cm": 20.3
+  },
+  "25": {
+   "height_m": 10.74,
+   "crown_dia_m": 7.72,
+   "crown_center_m": 6.8,
+   "crown_radius_m": 3.86,
+   "dbh_cm": 28.7
+  }
+ },
+ "by_dbh": [
+  {
+   "height_m": 2.8,
+   "crown_dia_m": 1.27,
+   "crown_center_m": 1.82,
+   "crown_radius_m": 0.63,
+   "dbh_cm": 3
+  },
+  {
+   "height_m": 4.23,
+   "crown_dia_m": 2.38,
+   "crown_center_m": 2.81,
+   "crown_radius_m": 1.19,
+   "dbh_cm": 6
+  },
+  {
+   "height_m": 5.27,
+   "crown_dia_m": 3.27,
+   "crown_center_m": 3.48,
+   "crown_radius_m": 1.63,
+   "dbh_cm": 9
+  },
+  {
+   "height_m": 6.36,
+   "crown_dia_m": 4.03,
+   "crown_center_m": 4.29,
+   "crown_radius_m": 2.02,
+   "dbh_cm": 12
+  },
+  {
+   "height_m": 7.22,
+   "crown_dia_m": 4.72,
+   "crown_center_m": 4.78,
+   "crown_radius_m": 2.36,
+   "dbh_cm": 15
+  },
+  {
+   "height_m": 8.06,
+   "crown_dia_m": 5.49,
+   "crown_center_m": 5.28,
+   "crown_radius_m": 2.75,
+   "dbh_cm": 18
+  },
+  {
+   "height_m": 8.75,
+   "crown_dia_m": 6.26,
+   "crown_center_m": 5.65,
+   "crown_radius_m": 3.13,
+   "dbh_cm": 21
+  },
+  {
+   "height_m": 9.58,
+   "crown_dia_m": 6.97,
+   "crown_center_m": 6.17,
+   "crown_radius_m": 3.49,
+   "dbh_cm": 24
+  },
+  {
+   "height_m": 10.37,
+   "crown_dia_m": 7.67,
+   "crown_center_m": 6.66,
+   "crown_radius_m": 3.84,
+   "dbh_cm": 27
+  },
+  {
+   "height_m": 11.1,
+   "crown_dia_m": 8.36,
+   "crown_center_m": 7.1,
+   "crown_radius_m": 4.18,
+   "dbh_cm": 30
+  },
+  {
+   "height_m": 11.78,
+   "crown_dia_m": 9.03,
+   "crown_center_m": 7.49,
+   "crown_radius_m": 4.52,
+   "dbh_cm": 33
+  },
+  {
+   "height_m": 12.34,
+   "crown_dia_m": 9.69,
+   "crown_center_m": 7.77,
+   "crown_radius_m": 4.84,
+   "dbh_cm": 36
+  },
+  {
+   "height_m": 12.86,
+   "crown_dia_m": 10.33,
+   "crown_center_m": 8.03,
+   "crown_radius_m": 5.17,
+   "dbh_cm": 39
+  },
+  {
+   "height_m": 13.35,
+   "crown_dia_m": 10.96,
+   "crown_center_m": 8.34,
+   "crown_radius_m": 5.48,
+   "dbh_cm": 42
+  },
+  {
+   "height_m": 13.98,
+   "crown_dia_m": 11.42,
+   "crown_center_m": 8.73,
+   "crown_radius_m": 5.71,
+   "dbh_cm": 45
+  },
+  {
+   "height_m": 14.7,
+   "crown_dia_m": 11.9,
+   "crown_center_m": 9.17,
+   "crown_radius_m": 5.95,
+   "dbh_cm": 48
+  },
+  {
+   "height_m": 15.2,
+   "crown_dia_m": 12.49,
+   "crown_center_m": 9.41,
+   "crown_radius_m": 6.25,
+   "dbh_cm": 51
+  },
+  {
+   "height_m": 15.81,
+   "crown_dia_m": 13.07,
+   "crown_center_m": 9.81,
+   "crown_radius_m": 6.54,
+   "dbh_cm": 54
+  },
+  {
+   "height_m": 16.52,
+   "crown_dia_m": 13.49,
+   "crown_center_m": 10.31,
+   "crown_radius_m": 6.75,
+   "dbh_cm": 57
+  },
+  {
+   "height_m": 16.9,
+   "crown_dia_m": 13.89,
+   "crown_center_m": 10.5,
+   "crown_radius_m": 6.95,
+   "dbh_cm": 60
+  },
+  {
+   "height_m": 17.24,
+   "crown_dia_m": 14.27,
+   "crown_center_m": 10.65,
+   "crown_radius_m": 7.14,
+   "dbh_cm": 63
+  },
+  {
+   "height_m": 17.57,
+   "crown_dia_m": 14.64,
+   "crown_center_m": 10.8,
+   "crown_radius_m": 7.32,
+   "dbh_cm": 66
+  },
+  {
+   "height_m": 17.89,
+   "crown_dia_m": 15.0,
+   "crown_center_m": 10.93,
+   "crown_radius_m": 7.5,
+   "dbh_cm": 69
+  },
+  {
+   "height_m": 18.31,
+   "crown_dia_m": 15.36,
+   "crown_center_m": 11.19,
+   "crown_radius_m": 7.68,
+   "dbh_cm": 72
+  },
+  {
+   "height_m": 18.66,
+   "crown_dia_m": 15.72,
+   "crown_center_m": 11.37,
+   "crown_radius_m": 7.86,
+   "dbh_cm": 75
+  },
+  {
+   "height_m": 19.08,
+   "crown_dia_m": 16.0,
+   "crown_center_m": 11.61,
+   "crown_radius_m": 8.0,
+   "dbh_cm": 78
+  },
+  {
+   "height_m": 19.51,
+   "crown_dia_m": 16.24,
+   "crown_center_m": 11.87,
+   "crown_radius_m": 8.12,
+   "dbh_cm": 81
+  },
+  {
+   "height_m": 19.94,
+   "crown_dia_m": 16.51,
+   "crown_center_m": 12.15,
+   "crown_radius_m": 8.25,
+   "dbh_cm": 84
+  },
+  {
+   "height_m": 20.22,
+   "crown_dia_m": 16.84,
+   "crown_center_m": 12.32,
+   "crown_radius_m": 8.42,
+   "dbh_cm": 87
+  },
+  {
+   "height_m": 20.72,
+   "crown_dia_m": 17.16,
+   "crown_center_m": 12.62,
+   "crown_radius_m": 8.58,
+   "dbh_cm": 90
+  },
+  {
+   "height_m": 20.79,
+   "crown_dia_m": 17.47,
+   "crown_center_m": 12.54,
+   "crown_radius_m": 8.73,
+   "dbh_cm": 93
+  },
+  {
+   "height_m": 21.17,
+   "crown_dia_m": 17.76,
+   "crown_center_m": 12.78,
+   "crown_radius_m": 8.88,
+   "dbh_cm": 96
+  },
+  {
+   "height_m": 21.54,
+   "crown_dia_m": 18.03,
+   "crown_center_m": 13.0,
+   "crown_radius_m": 9.02,
+   "dbh_cm": 99
+  },
+  {
+   "height_m": 21.89,
+   "crown_dia_m": 18.29,
+   "crown_center_m": 13.23,
+   "crown_radius_m": 9.15,
+   "dbh_cm": 102
+  },
+  {
+   "height_m": 22.21,
+   "crown_dia_m": 19.13,
+   "crown_center_m": 13.43,
+   "crown_radius_m": 9.56,
+   "dbh_cm": 105
+  },
+  {
+   "height_m": 22.48,
+   "crown_dia_m": 19.88,
+   "crown_center_m": 13.63,
+   "crown_radius_m": 9.94,
+   "dbh_cm": 108
+  },
+  {
+   "height_m": 22.74,
+   "crown_dia_m": 20.16,
+   "crown_center_m": 13.86,
+   "crown_radius_m": 10.08,
+   "dbh_cm": 111
+  },
+  {
+   "height_m": 22.99,
+   "crown_dia_m": 20.43,
+   "crown_center_m": 14.09,
+   "crown_radius_m": 10.21,
+   "dbh_cm": 114
+  },
+  {
+   "height_m": 23.24,
+   "crown_dia_m": 20.7,
+   "crown_center_m": 14.33,
+   "crown_radius_m": 10.35,
+   "dbh_cm": 117
+  },
+  {
+   "height_m": 23.49,
+   "crown_dia_m": 20.96,
+   "crown_center_m": 14.53,
+   "crown_radius_m": 10.48,
+   "dbh_cm": 120
+  }
+ ]
+}
