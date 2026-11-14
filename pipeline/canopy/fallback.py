@@ -17,7 +17,7 @@ MATCH_CONFIDENCE = {"species": 0.6, "genus": 0.45, "generic": 0.3}
 
 
 def shape_for(species: str | None) -> str:
-    genus = (species or "").split(" ")[0]
+    genus = species.split(" ")[0] if isinstance(species, str) else ""
     if genus in CONICAL_GENERA:
         return "cone"
     if genus in FLAT_TOP_GENERA:
@@ -26,7 +26,7 @@ def shape_for(species: str | None) -> str:
 
 
 def leaf_on_for(species: str | None) -> tuple[int, int]:
-    genus = (species or "").split(" ")[0]
+    genus = species.split(" ")[0] if isinstance(species, str) else ""
     return (1, 12) if genus in EVERGREEN_GENERA else (5, 10)
 
 

@@ -33,10 +33,8 @@ def step_canopy(aoi: AOI, use_lidar: bool = True) -> None:
     lidar_path = aoi.dir("interim") / "lidar_crowns.parquet"
     if use_lidar and lidar_path.exists():
         lid = pd.read_parquet(lidar_path)
-        for r in lid.to_dict("records"):
-            crowns[r["tree_id"]] = CrownModel(**{k: r[k] for k in CrownModel.model_fields if k in r and k != "leaf_on_months"},
-                                              leaf_on_months=crowns[r["tree_id"]].leaf_on_months
-                                              if r["tree_id"] in crowns else (5, 10))
+        for c in publish.crowns_from_frame(lid):
+            crowns[c.tree_id] = c
         print(f"[canopy] {len(lid)} LiDAR crowns merged; {sum(c.source == 'allometric' for c in crowns.values())} allometric")
     extra = trees[["tree_id", "species_label", "dbh_cm", "tpcondition"]]
     publish.write(aoi, "crowns", publish.crowns_gdf(list(crowns.values()), extra))
