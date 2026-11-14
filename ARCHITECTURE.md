@@ -98,6 +98,7 @@ class ShadeResult(BaseModel):
     facade_shade_m2: float       # tree shadow intercepted by building walls/roofs
     self_shaded_fraction: float  # share of the tree's ground shadow already in building shadow
     sidewalk_shade_m2: float     # ground shadow ∩ sidewalk polygon, minus building shadow
+    leaf_on: bool                # False for deciduous crowns outside leaf_on_months
     # v0 also writes the shadow polygon itself (WKB) in the GeoParquet row, for the map
 
 class ShadeSummary(BaseModel):   # one row per tree per scenario day; drives the UI and ranking
