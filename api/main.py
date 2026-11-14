@@ -1,7 +1,7 @@
 """Shade Queue API: read-only over data/processed/{aoi}/*.parquet via DuckDB spatial.
 
-Run:  make api   (uvicorn api.main:app --reload --port 8000)
-Docs: http://localhost:8000/docs
+Run:  make api   (uvicorn api.main:app --reload --port 8811)
+Docs: http://localhost:8811/docs
 """
 from __future__ import annotations
 
@@ -184,7 +184,7 @@ def _context():
     return _ctx
 
 
-# serve the web app from the same origin: http://localhost:8000/
+# serve the web app from the same origin: http://localhost:8811/
 WEB = ROOT / "web"
 app.mount("/web", StaticFiles(directory=WEB), name="web")
 
