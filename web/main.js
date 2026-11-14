@@ -153,8 +153,11 @@ async function setHour(i) {
   if (state.dayStamps[state.idx] !== ts) return;  // user moved on
   state.tShadows = t; state.bShadows = b;
   if (state.planted?.byTs) state.planted.shadow = state.planted.byTs[ts] || null;
-  const shade = t.features.reduce((a, f) => a + f.properties.sidewalk_shade_m2, 0);
-  $("stats").textContent = `${t.features.length} tree shadows · ${Math.round(shade).toLocaleString()} m² of sidewalk shaded by trees (net of building shade)`;
+  const leafy = t.features.filter((f) => f.properties.leaf_on);
+  const shade = leafy.reduce((a, f) => a + f.properties.sidewalk_shade_m2, 0);
+  $("stats").textContent = leafy.length
+    ? `${leafy.length} trees in leaf · ${Math.round(shade).toLocaleString()} m² of sidewalk shaded by trees (net of building shade)`
+    : `Leaf-off: deciduous crowns are bare, so shadows are drawn faint and not counted as shade`;
   render();
 }
 
