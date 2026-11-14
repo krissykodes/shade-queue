@@ -20,10 +20,11 @@ DATASETS = {
     "forms_trees": ("hn5i-inap", lambda a: a.soql_within_box("location"),
                     "objectid,globalid,dbh,tpstructure,tpcondition,genusspecies,planteddate,plantingspaceglobalid,location"),
     "forms_planting_spaces": ("82zj-84is", lambda a: a.soql_within_box("location"),
-                              "objectid,globalid,psstatus,pssite,plantingspaceonstreet,width,length,jurisdiction,"
+                              "objectid,globalid,psstatus,pssite,buildingnumber,zipcode,communityboard,plantingspaceonstreet,width,length,jurisdiction,"
                               "overheadutilities,streetname,nta,latitude,longitude,location"),
     "buildings": ("5zhs-2jue", lambda a: a.soql_intersects("the_geom"),
                   "bin,doitt_id,height_roof,ground_elevation,construction_year,feature_code,last_status_type,the_geom"),
+    "sidewalks": ("52n9-sdep", lambda a: a.soql_intersects("the_geom"), "the_geom,feat_code,status"),
     "centerline": ("inkn-q76z", lambda a: a.soql_intersects("the_geom"),
                    "physicalid,full_street_name,streetwidth,trafdir,rw_type,segment_type,the_geom"),
 }
@@ -50,7 +51,7 @@ def query(dataset_id: str, where: str, select: str | None = None, page: int = 50
 def fetch(aoi: AOI, name: str, refresh: bool = False) -> Path:
     ds_id, where, select = DATASETS[name]
     # buildings/streets need shadow context beyond the AOI
-    area = aoi.buffered(60) if name in ("buildings", "centerline") else aoi
+    area = aoi.buffered(60) if name in ("buildings", "centerline", "sidewalks") else aoi
     out = aoi.dir("raw") / f"{name}.json"
     if out.exists() and not refresh:
         return out

@@ -1,7 +1,8 @@
 """Street centerlines (inkn-q76z) → street segments with width/orientation, plus a v0 sidewalk band.
 
-v0 sidewalk = band from curb (centerline ± streetwidth/2) out to curb + SIDEWALK_M, minus building
-footprints. Swap for the NYC planimetric sidewalk layer later behind `sidewalks()`.
+Sidewalks come from the NYC Planimetric Sidewalk layer (52n9-sdep), buffered 0.3 m to close slivers
+(as in Shade First NYC), minus building footprints. Fallback if that fetch fails: a SIDEWALK_M band from
+the curb (centerline ± streetwidth/2).
 """
 from __future__ import annotations
 
@@ -40,7 +41,15 @@ def build(aoi: AOI) -> tuple[gpd.GeoDataFrame, gpd.GeoDataFrame]:
     road = shapely.union_all(streets.geometry.buffer(half, cap_style="flat").values)
     outer = shapely.union_all(streets.geometry.buffer(half + SIDEWALK_M, cap_style="flat").values)
     bldg = gpd.read_parquet(aoi.dir("interim") / "buildings.parquet")
-    walk = outer.difference(road).difference(shapely.union_all(bldg.geometry.values))
+    bldg_u = shapely.union_all(bldg.geometry.values)
+    try:
+        sw = pd.DataFrame(json.loads(socrata.fetch(aoi, "sidewalks").read_text()))
+        sw = gpd.GeoDataFrame(geometry=[shape(x) for x in sw["the_geom"] if x], crs=4326).to_crs(METRIC)
+        walk = shapely.union_all(sw.geometry.buffer(0.3).values).difference(bldg_u)
+        print(f"[streets] planimetric sidewalks: {len(sw)} polygons, {walk.area:,.0f} m²")
+    except Exception as ex:  # noqa: BLE001 - fall back to the curb band
+        print(f"[streets] planimetric sidewalks unavailable ({ex}); using {SIDEWALK_M} m curb band")
+        walk = outer.difference(road).difference(bldg_u)
     sidewalks = gpd.GeoDataFrame(geometry=[walk], crs=METRIC).explode(index_parts=False).reset_index(drop=True)
 
     d = aoi.dir("interim")

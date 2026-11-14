@@ -26,6 +26,7 @@ class AOI:
     north: float
     label: str = ""
     lidar_year: int = 2021
+    focus: dict | None = None  # optional {label, lon, lat} marker for the map
 
     @classmethod
     def load(cls, name: str, path: Path = ROOT / "aois.yaml") -> "AOI":
@@ -34,7 +35,7 @@ class AOI:
             raise KeyError(f"AOI {name!r} not in {path.name}; choose from {sorted(cfg)}")
         c = cfg[name]
         w, s, e, n = c["bbox"]
-        return cls(name, w, s, e, n, c.get("label", name), c.get("lidar_year", 2021))
+        return cls(name, w, s, e, n, c.get("label", name), c.get("lidar_year", 2021), c.get("focus"))
 
     @property
     def bbox(self) -> tuple[float, float, float, float]:
@@ -49,7 +50,7 @@ class AOI:
         dlat = metres / 111_320
         dlon = metres / (111_320 * 0.7575)  # cos(40.8°)
         return AOI(self.name, self.west - dlon, self.south - dlat, self.east + dlon,
-                   self.north + dlat, self.label, self.lidar_year)
+                   self.north + dlat, self.label, self.lidar_year, self.focus)
 
     def dir(self, stage: str) -> Path:
         """data/{raw,interim,processed}/{aoi}/"""

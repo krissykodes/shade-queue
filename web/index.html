@@ -4,17 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Shade Queue</title>
+  <meta name="description" content="Per-tree 3D canopy and shade simulation for NYC street trees, and a ranking of empty tree pits by the new sidewalk shade a tree there would cast." />
   <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/deck.gl@9.0.38/dist.min.js"></script>
-  <link rel="stylesheet" href="/web/style.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="map"></div>
 
+  <div id="left">
   <header class="card" id="title">
-    <h1>Shade Queue <span class="tag">v0 · Mott Haven</span></h1>
-    <p>Per-tree 3D crowns + simulated shade for NYC street trees. Click a tree, or an orange empty pit to plant one.</p>
+    <h1>Shade Queue <select id="aoi" aria-label="Area"></select></h1>
+    <p id="subtitle">Loading…</p>
   </header>
 
   <section class="card" id="controls">
@@ -44,13 +46,29 @@
     </div>
     <div id="legend"></div>
     <div id="stats" class="muted"></div>
+
+    <div id="queue">
+      <h2>Planting queue</h2>
+      <label><span>Plant the top <output id="topn-label">50</output> pits</span>
+        <input id="topn" type="range" min="10" max="200" step="5" value="50" />
+      </label>
+      <div id="queue-stats"></div>
+      <details>
+        <summary>How the pit score works</summary>
+        <p>For every empty street pit we "plant" a 10-year-old London plane (from a 2.5″ caliper, grown with USFS Urban Tree Database curves for Queens) and simulate its shadow on <b>July 15, 2–4 pm</b>, every 30 minutes.</p>
+        <p>Only shadow that lands on <b>sidewalk that is sunny today</b> counts as new shade: not under a building's shadow and not under an existing street tree's shadow (LiDAR-measured crowns).</p>
+        <p><b>New shade (m²·h)</b> = average new sidewalk shade × 2 hours. Pits are ranked by it. <b>Yield</b> = the share of the tree's shadow that is new shade.</p>
+        <p>Heat vulnerability is shown as published (DOHMH, by neighbourhood) and is <i>not</i> mixed into the score: Parks already prioritises neighbourhoods by HVI; this ranks pits within them.</p>
+      </details>
+    </div>
   </section>
+  </div>
 
   <aside class="card hidden" id="panel">
     <button id="close" type="button" aria-label="Close">×</button>
     <div id="panel-body"></div>
   </aside>
 
-  <script src="/web/main.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>

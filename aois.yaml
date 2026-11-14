@@ -8,3 +8,8 @@ brownsville:
   label: "Brownsville, Brooklyn"
   bbox: [-73.9180, 40.6560, -73.9030, 40.6680]
   lidar_year: 2021
+harlem_116:
+  label: "Central Harlem · W 116th St"
+  bbox: [-73.9600, 40.7990, -73.9455, 40.8080]
+  lidar_year: 2021
+  focus: {label: "191 W 116th St", lon: -73.9527, lat: 40.8033}  # between 116 & 207 W 116th (GeoSearch)

@@ -59,19 +59,35 @@ def step_shade(aoi: AOI) -> None:
 
 
 def step_sites(aoi: AOI) -> None:
-    from pipeline.sites import discover
-    publish.write(aoi, "sites", discover.discover(aoi))
+    import json
+    from pipeline.sites import discover, score
+    sites = discover.discover(aoi)
+    scen = score.run_scenarios(aoi, sites)
+    sites = score.score(aoi, sites, scen)
+    publish.write(aoi, "sites", sites)
+    publish.write(aoi, "site_scenarios", scen)
+    summ = score.summary(sites)
+    summ["profile_times"] = scen.attrs["profile_times"]
+    (aoi.dir("processed") / "sites_summary.json").write_text(json.dumps(summ, indent=1))
+    print(f"[sites] {json.dumps({k: v for k, v in summ.items() if k != 'profile_times'})}")
 
 
 def main() -> None:
     ap = argparse.ArgumentParser(prog="python -m pipeline")
-    ap.add_argument("cmd", choices=["run"])
-    ap.add_argument("--aoi", default="mott_haven")
+    ap.add_argument("cmd", choices=["run", "export"])
+    ap.add_argument("--aoi", action="append", help="AOI name(s) from aois.yaml; repeat for several")
+    ap.add_argument("--out", default="site")
     ap.add_argument("--steps", default=",".join(STEPS))
     ap.add_argument("--refresh", action="store_true")
     ap.add_argument("--no-lidar", action="store_true", help="force allometric crowns")
     a = ap.parse_args()
-    aoi = AOI.load(a.aoi)
+    names = a.aoi or ["harlem_116"]
+    if a.cmd == "export":
+        from pathlib import Path
+        from pipeline.export import export
+        export(names, Path(a.out))
+        return
+    aoi = AOI.load(names[0])
     for s in a.steps.split(","):
         t0 = time.time()
         if s == "ingest":

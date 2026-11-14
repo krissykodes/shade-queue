@@ -62,8 +62,20 @@ def _area_inter(a, b) -> float:
 
 
 def simulate(crowns: list[CrownModel], ctx: ShadeContext, samples: list[SunSample],
-             keep_geometry: bool = True) -> pd.DataFrame:
-    """One row per (tree, sample). Columns = ShadeResult fields + public_ground_m2 + total_shadow_m2 (+ geometry)."""
+             keep_geometry: bool = True, existing: list[CrownModel] | None = None) -> pd.DataFrame:
+    """One row per (tree, sample). Columns = ShadeResult fields + public_ground_m2 + total_shadow_m2 (+ geometry).
+
+    `existing`: crowns already standing (e.g. the street-tree inventory). Their shadows count as shade that is
+    already there, so `new_sidewalk_shade_m2` = sidewalk shade that is in neither building nor existing-tree
+    shadow. This is the Shade First NYC "new shade" question, used to score empty pits.
+    """
+    ex = None
+    if existing:
+        elon = np.array([c.lon for c in existing]); elat = np.array([c.lat for c in existing])
+        ex_x, ex_y = (np.asarray(v) for v in to_metric(elon, elat))
+        ex = (ex_x, ex_y, np.array([c.crown_base_m for c in existing]), np.array([c.height_m for c in existing]),
+              np.array([c.crown_radius_m for c in existing]), np.array([c.shape for c in existing]),
+              np.array([c.leaf_on_months for c in existing]))
     lon = np.array([c.lon for c in crowns]); lat = np.array([c.lat for c in crowns])
     x, y = to_metric(lon, lat)
     x, y = np.asarray(x), np.asarray(y)
@@ -85,6 +97,14 @@ def simulate(crowns: list[CrownModel], ctx: ShadeContext, samples: list[SunSampl
         bs_geoms = bsh_all[valid]
         bs_tree = STRtree(bs_geoms)
         building_rows.append((s.timestamp, shapely.union_all(bs_geoms)))
+        ex_geoms = ex_tree = None
+        if ex is not None:
+            m = s.timestamp.month
+            lo, hi = ex[6][:, 0], ex[6][:, 1]
+            leafy = np.where(lo <= hi, (lo <= m) & (m <= hi), (m >= lo) | (m <= hi))
+            if leafy.any():
+                ex_geoms = crown_shadows(*(a[leafy] for a in ex[:6]), s.altitude_deg, s.azimuth_deg)
+                ex_tree = STRtree(ex_geoms)
 
         for i, S in enumerate(tsh):
             B = _local_union(ctx.fp_tree, ctx.footprints, S)
@@ -102,13 +122,21 @@ def simulate(crowns: list[CrownModel], ctx: ShadeContext, samples: list[SunSampl
             else:
                 sidewalk, sw_area_raw = 0.0, 0.0
             public = sw_area_raw + _area_inter(ground, RD)
+            new_sw = sidewalk
+            if ex_tree is not None and SW is not None and sidewalk > 0:
+                sw_new = shapely.intersection(ground, SW)
+                if BS is not None:
+                    sw_new = shapely.difference(sw_new, BS)
+                ET = _local_union(ex_tree, ex_geoms, sw_new)
+                new_sw = float((sw_new if ET is None else shapely.difference(sw_new, ET)).area)
             c = crowns[i]
             row = dict(tree_id=ids[i], timestamp=s.timestamp, sun_altitude_deg=round(s.altitude_deg, 2),
                        sun_azimuth_deg=round(s.azimuth_deg, 2), ground_shade_m2=round(ga, 2),
                        facade_shade_m2=round(facade, 2),
                        self_shaded_fraction=round(min(in_bldg_shadow / ga, 1.0), 4) if ga > 0 else 0.0,
                        sidewalk_shade_m2=round(sidewalk, 2), leaf_on=c.leaf_on(s.timestamp.month),
-                       public_ground_m2=round(min(public, ga), 2), total_shadow_m2=round(float(S.area), 2))
+                       public_ground_m2=round(min(public, ga), 2), total_shadow_m2=round(float(S.area), 2),
+                       new_sidewalk_shade_m2=round(new_sw, 2))
             if keep_geometry:
                 row["geometry"] = ground
             rows.append(row)
